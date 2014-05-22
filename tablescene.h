@@ -9,6 +9,7 @@
 #include "tableview.h"
 #include "ball.h"
 #include "brick.h"
+#include "paddle.h"
 
 class TableScene : public QGraphicsScene
 {
@@ -27,6 +28,9 @@ public:
     TableScene & addBrick(Brick *brick);
     std::vector<Brick *> & getBricks();
 
+    TableScene & addPaddle(Paddle *paddle);
+    Paddle * getPaddle();
+
     virtual ~TableScene();
 
 protected:
@@ -38,6 +42,7 @@ protected:
     void toggleAnimation();
 
     virtual void keyPressEvent (QKeyEvent *event);
+    virtual void mouseMoveEvent(QGraphicsSceneMouseEvent *event);
 
 private:
     TableScene();
@@ -47,6 +52,7 @@ private:
     TableView m_view;   /*!< TableView for displaying scene */
     Ball * m_ball;      /*!< Pointer to the ball */
     std::vector<Brick *> m_bricks; /*!< Vector of pointers to bricks */
+    Paddle * m_paddle;
 
 signals:
 

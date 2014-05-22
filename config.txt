@@ -1,10 +1,10 @@
-boxWidth:600
+boxWidth:1000
 boxHeight:600
 ballRadius:10
 ballX:300
 ballY:400
-ballXSpeed:-6
-ballYSpeed:7
+ballXSpeed:-5
+ballYSpeed:5
 
 tableColor:0xfffff0
 ballColor:0xda063b
@@ -85,3 +85,9 @@ regeneratedBrickColor:0xFFE800
 # Shows the number of lives each brick has remaining
 
 showBrickLives:1
+
+
+## Stage 3
+
+# Turn on the GAME
+playGame:1

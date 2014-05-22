@@ -2,6 +2,8 @@
 
 #include <stdexcept>
 #include <QKeyEvent>
+#include <QGraphicsSceneMouseEvent>
+#include <QApplication>
 
 /*!
  * \brief TableScene constructor
@@ -27,6 +29,8 @@ TableScene::TableScene(int width, int height,
     QObject::connect(&m_timer, SIGNAL(timeout()), this, SLOT(advance()));
 
     m_view.setRenderHint(QPainter::Antialiasing);
+    QApplication::setOverrideCursor(Qt::BlankCursor);
+    m_view.setMouseTracking(true);
 }
 
 //! TableScene destructor
@@ -70,7 +74,24 @@ void TableScene::keyPressEvent (QKeyEvent *e) {
     if ((e->key() == Qt::Key_Space)){
         this->toggleAnimation();
     }
+}
 
+void TableScene::mouseMoveEvent(QGraphicsSceneMouseEvent *e){
+    Paddle * paddle = this->getPaddle();
+    qreal paddleWidth = paddle->boundingRect().width();
+    qreal paddleY = paddle->pos().y();
+    qreal mouseX = e->scenePos().x();
+
+    qreal newPaddleX = mouseX - paddleWidth/2;
+
+    std::cout << mouseX << std::endl;
+
+    if (newPaddleX < 0)
+        paddle->setX(0);
+    else if (newPaddleX > this->width()-paddleWidth)
+        paddle->setX(this->width()-paddleWidth);
+    else
+        paddle->setPos(mouseX - paddleWidth/2, paddleY);
 }
 
 /*!
@@ -172,4 +193,16 @@ TableScene & TableScene::addBrick(Brick *brick) {
  */
 std::vector<Brick *> & TableScene::getBricks()  {
     return m_bricks;
+}
+
+TableScene & TableScene::addPaddle(Paddle *paddle){
+    m_paddle = paddle;
+    this->addItem(paddle);
+
+    return *this;
+}
+
+//! Getter for ball
+Paddle * TableScene::getPaddle() {
+    return m_paddle;
 }

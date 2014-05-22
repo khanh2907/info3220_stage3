@@ -18,6 +18,7 @@
 #include "brick.h"
 #include <vector>
 #include <QErrorMessage>
+#include "paddle.h"
 
 int main(int argc, char *argv[])
 {
@@ -49,7 +50,6 @@ int main(int argc, char *argv[])
                                                  the_reader->getBoxHeight(),
                                                  the_reader->getTableColor());
 
-
         // Add ball
         table->addBall(new Ball(  QPoint(the_reader->getBallX(), the_reader->getBallY()),
                                   the_reader->getBallRadius(),
@@ -63,6 +63,11 @@ int main(int argc, char *argv[])
                                        brick.lives,
                                        brick.visible,
                                        QBrush(brick.color)));
+        }
+
+        // Add paddle
+        if (the_reader->getPlayGame()) {
+            table->addPaddle(new Paddle (QRectF(0, 550, 70, 10)));
         }
 
         table->startAnimation(the_reader->getFramerate());
