@@ -1,0 +1,87 @@
+boxWidth:600
+boxHeight:600
+ballRadius:10
+ballX:300
+ballY:400
+ballXSpeed:-6
+ballYSpeed:7
+
+tableColor:0xfffff0
+ballColor:0xda063b
+framerate:70
+
+## Brick and layout definition
+
+# Bricks should be defined 1 brick per line in the following format
+# brick:X:Y:Width:Height:Lives:Visible(bool):Color(hex)
+
+# Bricks are placed in the order of definition, and subsequent
+# overlapping bricks are ignored
+
+brick:30:30:50:20:10:1:0xEB0067
+brick:100:30:50:20:10:1:0xEB0067
+brick:170:30:50:20:10:1:0xEB0067
+brick:240:30:50:20:10:1:0xEB0067
+brick:310:30:50:20:10:1:0xEB0067
+brick:380:30:50:20:10:1:0xEB0067
+brick:450:30:50:20:10:1:0xEB0067
+brick:520:30:50:20:10:1:0xEB0067
+
+brick:30:80:50:20:2:1:0xFF7100
+brick:100:80:50:20:4:1:0xEB0067
+brick:170:80:50:20:4:1:0xEB0067
+brick:240:80:50:20:4:1:0xEB0067
+brick:310:80:50:20:4:1:0xEB0067
+brick:380:80:50:20:4:1:0xEB0067
+brick:450:80:50:20:4:1:0xEB0067
+brick:520:80:50:20:2:1:0xFF7100
+
+brick:30:130:50:20:2:1:0xFF7100
+brick:100:130:50:20:2:1:0xFF7100
+brick:170:130:50:20:4:0:0xEB0067
+brick:240:130:50:20:4:0:0xEB0067
+brick:310:130:50:20:4:0:0xEB0067
+brick:380:130:50:20:4:0:0xEB0067
+brick:450:130:50:20:2:1:0xFF7100
+brick:520:130:50:20:2:1:0xFF7100
+
+brick:30:180:50:20:5:1:0x00CDC5
+brick:100:180:50:20:5:1:0x00CDC5
+brick:170:180:50:20:5:1:0x00CDC5
+brick:240:180:50:20:5:1:0x00CDC5
+brick:310:180:50:20:5:1:0x00CDC5
+brick:380:180:50:20:5:1:0x00CDC5
+brick:450:180:50:20:5:1:0x00CDC5
+brick:520:180:50:20:5:1:0x00CDC5
+
+brick:30:230:50:20:2:0:0x8DF400
+brick:100:230:50:20:2:1:0x8DF400
+brick:170:230:50:20:2:1:0x8DF400
+brick:240:230:50:20:2:1:0x8DF400
+brick:310:230:50:20:2:1:0x8DF400
+brick:380:230:50:20:2:1:0x8DF400
+brick:450:230:50:20:2:1:0x8DF400
+brick:520:230:50:20:2:0:0x8DF400
+
+
+## Extension options
+
+# When enableBrickRegenerate is set to 1 (true), bricks can randomly
+# re-appear in the box. This inclues bricks that have already been destroyed,
+# and bricks that
+
+enableBrickRegenerate:1
+
+# Probability (per frame) that a given brick will re-appear
+
+regeneratedBrickProbability:0.0005
+
+# Regenerated brick is given a random number of lives between 0
+# and regeneratedBrickMaxLives
+
+regeneratedBrickMaxLives:20
+regeneratedBrickColor:0xFFE800
+
+# Shows the number of lives each brick has remaining
+
+showBrickLives:1
