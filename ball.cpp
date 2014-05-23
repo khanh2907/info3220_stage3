@@ -8,6 +8,8 @@
 #include <cmath>
 #include "paddle.h"
 #include "tablescene.h"
+#include <QMessageBox>
+#include <QApplication>
 
 using namespace std;
 
@@ -136,6 +138,10 @@ void Ball::advance(int step) {
         return;
     }
 
+    TableScene * tablescene = dynamic_cast<TableScene *>(scene());
+
+    bool playGameOn = tablescene->getPlayGame();
+
     QPointF coordinate = mapToParent(0 + m_xVelocity, 0 + m_yVelocity);
 
     bool x_collided = false;
@@ -144,8 +150,39 @@ void Ball::advance(int step) {
     // Check for a collision with the sizes of the box
 
     if (isBottomCollision()) {
-        coordinate.setY(this->scene()->height() - this->boundingRect().bottom());
-        y_collided = true;
+        if (!playGameOn) {
+            coordinate.setY(this->scene()->height() - this->boundingRect().bottom());
+            y_collided = true;
+        }
+        else {
+
+            QApplication::setOverrideCursor(Qt::ArrowCursor);
+
+            QMessageBox msgBox;
+            msgBox.setText("GGWP!");
+            msgBox.setInformativeText("You scored 9999!");
+            msgBox.addButton("Play Again", QMessageBox::YesRole);
+            msgBox.addButton("Submit Highscore", QMessageBox::ApplyRole);
+            msgBox.addButton("Exit", QMessageBox::NoRole);
+            msgBox.setIcon(QMessageBox::Information);
+            msgBox.exec();
+
+
+            if (msgBox.buttonRole(msgBox.clickedButton()) == QMessageBox::YesRole){
+                //decrement life - TODO create player object
+                // RESTART GAME
+            }
+            else if (msgBox.buttonRole(msgBox.clickedButton()) == QMessageBox::ApplyRole) {
+                // TODO;
+                QCoreApplication::instance()->exit();
+            }
+            else if (msgBox.buttonRole(msgBox.clickedButton()) == QMessageBox::NoRole) {
+                QCoreApplication::instance()->exit();
+            }
+
+
+
+        }
     }
 
     if (isCeilCollision()) {
@@ -196,7 +233,7 @@ void Ball::advance(int step) {
                    x_collided = true;
                    coordinate.setX(brickLeft - diameter);
                 }
-                if (currentXPos >= brickRight) {
+                else if (currentXPos >= brickRight) {
                    x_collided = true;
                    coordinate.setX(brickRight);
                 }
@@ -204,13 +241,40 @@ void Ball::advance(int step) {
                    y_collided = true;
                    coordinate.setY(brickTop - diameter);
                 }
-                if (currentYPos >= brickBottom) {
+                else if (currentYPos >= brickBottom) {
                    y_collided = true;
                    coordinate.setY(brickBottom);
                 }
 
                 // reduce brick life by one
                 thisBrick->decLife();
+
+            }
+        }
+
+        Paddle * paddle = dynamic_cast<Paddle *>(item);
+
+        if (paddle != NULL) {
+            qreal paddleTop = paddle->sceneBoundingRect().top();
+            qreal paddleLeft = paddle->sceneBoundingRect().left();
+            qreal paddleRight = paddle->sceneBoundingRect().right();
+
+            if (futureBallLeft <= paddleRight && futureBallRight >= paddleLeft && futureBallBottom >= paddleTop) {
+
+                 // if it is inside then check which side the ball is going to hit
+                // then send it back the other way
+                if (currentXPos + diameter <= paddleLeft) {
+                   x_collided = true;
+                   coordinate.setX(paddleLeft - diameter);
+                }
+                else if (currentXPos >= paddleRight) {
+                   x_collided = true;
+                   coordinate.setX(paddleRight);
+                }
+                if (currentYPos + diameter <= paddleTop) {
+                   y_collided = true;
+                   coordinate.setY(paddleTop - diameter);
+                }
 
             }
         }

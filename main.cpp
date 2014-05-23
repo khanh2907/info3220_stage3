@@ -68,7 +68,7 @@ int main(int argc, char *argv[])
 
         // Add paddle
         if (the_reader->getPlayGame()) {
-            table->addPaddle(new Paddle (QRectF(0, 550, 70, 10)));
+            table->addPaddle(new Paddle (QRectF(0, 550, 100, 10)));
         }
 
         table->startAnimation(the_reader->getFramerate());
