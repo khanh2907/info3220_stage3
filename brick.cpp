@@ -1,6 +1,7 @@
 #include "brick.h"
 #include "configreader.h"
 #include <sstream>
+#include <QGraphicsScene>
 
 //! Brick constructor
 Brick::Brick(const QRectF &rect,
@@ -49,6 +50,9 @@ void Brick::advance(int step) {
 
     if (m_lives <= 0) {
         this->setVisible(false);
+        scene()->removeItem(this);
+        this->deleteLater();
+
     }
 
     ConfigReader *the_reader = ConfigReader::getInstance();

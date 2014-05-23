@@ -19,9 +19,10 @@
  *
  */
 TableScene::TableScene(int width, int height,
-                       QColor bgColour) :
+                       QColor bgColour, bool playGame) :
     QGraphicsScene(0, 0, width, height),
-    m_view(this)
+    m_view(this),
+    m_playGame(playGame)
 {
     this->setBackgroundBrush(QBrush(bgColour));
 
@@ -29,8 +30,12 @@ TableScene::TableScene(int width, int height,
     QObject::connect(&m_timer, SIGNAL(timeout()), this, SLOT(advance()));
 
     m_view.setRenderHint(QPainter::Antialiasing);
-    QApplication::setOverrideCursor(Qt::BlankCursor);
-    m_view.setMouseTracking(true);
+
+
+    if (m_playGame){
+        QApplication::setOverrideCursor(Qt::BlankCursor);
+        m_view.setMouseTracking(true);
+    }
 }
 
 //! TableScene destructor
@@ -77,21 +82,21 @@ void TableScene::keyPressEvent (QKeyEvent *e) {
 }
 
 void TableScene::mouseMoveEvent(QGraphicsSceneMouseEvent *e){
-    Paddle * paddle = this->getPaddle();
-    qreal paddleWidth = paddle->boundingRect().width();
-    qreal paddleY = paddle->pos().y();
-    qreal mouseX = e->scenePos().x();
+    if (m_playGame){
+        Paddle * paddle = this->getPaddle();
+        qreal paddleWidth = paddle->boundingRect().width();
+        qreal paddleY = paddle->pos().y();
+        qreal mouseX = e->scenePos().x();
 
-    qreal newPaddleX = mouseX - paddleWidth/2;
+        qreal newPaddleX = mouseX - paddleWidth/2;
 
-    std::cout << mouseX << std::endl;
-
-    if (newPaddleX < 0)
-        paddle->setX(0);
-    else if (newPaddleX > this->width()-paddleWidth)
-        paddle->setX(this->width()-paddleWidth);
-    else
-        paddle->setPos(mouseX - paddleWidth/2, paddleY);
+        if (newPaddleX < 0)
+            paddle->setX(0);
+        else if (newPaddleX > this->width()-paddleWidth)
+            paddle->setX(this->width()-paddleWidth);
+        else
+            paddle->setPos(mouseX - paddleWidth/2, paddleY);
+    }
 }
 
 /*!
@@ -140,13 +145,17 @@ Ball * TableScene::getBall() {
  * \param bgColour QColor background colour of table
  *
  * \return the table instance
+ *
+ *
+ *
+ *
  */
 TableScene * TableScene::instance(int width, int height,
-                                 QColor bgColour)
+                                 QColor bgColour, bool playGame)
 {
     if (m_table_instance == 0) {
         m_table_instance = new TableScene(width, height,
-                                          bgColour);
+                                          bgColour, playGame);
         return m_table_instance;
     }
 
@@ -181,7 +190,9 @@ TableScene & TableScene::addBrick(Brick *brick) {
 
     if (brick->collidingItems().size() > 0) {
         this->removeItem(brick);
+        delete brick;
     }
+
 
     return *this;
 }
@@ -205,4 +216,8 @@ TableScene & TableScene::addPaddle(Paddle *paddle){
 //! Getter for ball
 Paddle * TableScene::getPaddle() {
     return m_paddle;
+}
+
+bool TableScene::getPlayGame() {
+    return m_playGame;
 }

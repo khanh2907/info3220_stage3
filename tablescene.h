@@ -17,7 +17,7 @@ class TableScene : public QGraphicsScene
 
 public:
     static TableScene * instance(int width, int height,
-                                 QColor bgColour);
+                                 QColor bgColour, bool playGame);
 
     void startAnimation(int framerate);
     QGraphicsView & view();
@@ -31,11 +31,13 @@ public:
     TableScene & addPaddle(Paddle *paddle);
     Paddle * getPaddle();
 
+    bool getPlayGame();
+
     virtual ~TableScene();
 
 protected:
     TableScene(int width, int height,
-               QColor bgColour);
+               QColor bgColour, bool playGame);
 
     void stopAnimation();
     void restartAnimation();
@@ -53,6 +55,7 @@ private:
     Ball * m_ball;      /*!< Pointer to the ball */
     std::vector<Brick *> m_bricks; /*!< Vector of pointers to bricks */
     Paddle * m_paddle;
+    bool m_playGame;
 
 signals:
 

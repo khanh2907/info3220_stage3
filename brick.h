@@ -4,7 +4,7 @@
 #include <QGraphicsItem>
 #include <QPainter>
 
-class Brick : public QGraphicsRectItem
+class Brick : public QGraphicsRectItem, public QObject
 {
 
 public:

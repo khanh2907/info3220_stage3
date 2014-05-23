@@ -6,6 +6,8 @@
 #include <sstream>
 #include "coordinate.h"
 #include <cmath>
+#include "paddle.h"
+#include "tablescene.h"
 
 using namespace std;
 
@@ -165,56 +167,54 @@ void Ball::advance(int step) {
     // Check for collisions with other objects
     // (At this stage this only covers Bricks)
 
-    QList<QGraphicsItem *> collidingItems = scene()->collidingItems(this);
+    QList<QGraphicsItem *> items = scene()->items();
 
-    foreach (QGraphicsItem *item, collidingItems) {
+    qreal currentXPos = this->pos().x();
+    qreal currentYPos = this->pos().y();
+    qreal diameter = m_radius * 2;
 
-        Brick * brick = dynamic_cast<Brick *>(item);
-        if (brick != NULL) { // if the dynamic cast is successful, the item is a brick
+    qreal futureBallTop = coordinate.y();
+    qreal futureBallBottom = coordinate.y() + diameter;
+    qreal futureBallLeft = coordinate.x();
+    qreal futureBallRight = coordinate.x() + diameter;
 
-            brick->decLife();
 
-            // Calculate lines for the edges of the brick
-            QRectF brickBoundingRect = mapFromItem(brick, brick->boundingRect()).boundingRect();
-            QLineF brickLeftEdge(brickBoundingRect.topLeft(), brickBoundingRect.bottomLeft());
-            QLineF brickRightEdge(brickBoundingRect.topRight(), brickBoundingRect.bottomRight());
-            QLineF brickTopEdge(brickBoundingRect.topLeft(), brickBoundingRect.topRight());
-            QLineF brickBottomEdge(brickBoundingRect.bottomLeft(), brickBoundingRect.bottomRight());
+    foreach (QGraphicsItem *item, items) {
 
-            // For each of the edges of the brick, calculate the point of intersection (if it exists)
-            // between the edge of the brick, and the line between the centres of the brick and ball
+        Brick * thisBrick = dynamic_cast<Brick *>(item);
 
-            QLineF lineBetweenCentres(brickBoundingRect.center(), this->boundingRect().center());
+        if (thisBrick != NULL && thisBrick->isVisible()) {
+            qreal brickTop = thisBrick->boundingRect().top();
+            qreal brickBottom = thisBrick->boundingRect().bottom();
+            qreal brickLeft = thisBrick->boundingRect().left();
+            qreal brickRight = thisBrick->boundingRect().right();
 
-            QPointF *intersectionPoint = new QPointF();
+            if (futureBallLeft <= brickRight && futureBallRight >= brickLeft && futureBallBottom >= brickTop && futureBallTop <= brickBottom) {
+                 // if it is inside then check which side the ball is going to hit
+                // then send it back the other way
+                if (currentXPos + diameter <= brickLeft) {
+                   x_collided = true;
+                   coordinate.setX(brickLeft - diameter);
+                }
+                if (currentXPos >= brickRight) {
+                   x_collided = true;
+                   coordinate.setX(brickRight);
+                }
+                if (currentYPos + diameter <= brickTop) {
+                   y_collided = true;
+                   coordinate.setY(brickTop - diameter);
+                }
+                if (currentYPos >= brickBottom) {
+                   y_collided = true;
+                   coordinate.setY(brickBottom);
+                }
 
-            // Top collision
-            if (lineBetweenCentres.intersect(brickBottomEdge, intersectionPoint) == QLineF::BoundedIntersection) {
-                coordinate.setY(mapToParent(0, brickBoundingRect.bottom()).y());
-                y_collided = true;
+                // reduce brick life by one
+                thisBrick->decLife();
+
             }
-
-            // Bottom collision
-            if (lineBetweenCentres.intersect(brickTopEdge, intersectionPoint) == QLineF::BoundedIntersection) {
-                coordinate.setY(mapToParent(0, brickBoundingRect.top() - this->boundingRect().height()).y());
-                y_collided = true;
-            }
-
-            // Left collision
-            if (lineBetweenCentres.intersect(brickRightEdge, intersectionPoint) == QLineF::BoundedIntersection) {
-                coordinate.setX(mapToParent(brickBoundingRect.right(), 0).x());
-                x_collided = true;
-            }
-
-            // Right collision
-            if (lineBetweenCentres.intersect(brickLeftEdge, intersectionPoint) == QLineF::BoundedIntersection) {
-                coordinate.setX(mapToParent(brickBoundingRect.left() - this->boundingRect().width(), 0).x());
-                x_collided = true;
-            }
-
-            delete intersectionPoint;
-
         }
+
     }
 
     // only update the velocity once per scene update

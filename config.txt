@@ -1,10 +1,10 @@
-boxWidth:1000
+boxWidth:600
 boxHeight:600
 ballRadius:10
 ballX:300
 ballY:400
-ballXSpeed:-5
-ballYSpeed:5
+ballXSpeed:-6
+ballYSpeed:7
 
 tableColor:0xfffff0
 ballColor:0xda063b
@@ -70,7 +70,7 @@ brick:520:230:50:20:2:0:0x8DF400
 # re-appear in the box. This inclues bricks that have already been destroyed,
 # and bricks that
 
-enableBrickRegenerate:1
+enableBrickRegenerate:0
 
 # Probability (per frame) that a given brick will re-appear
 
@@ -90,4 +90,4 @@ showBrickLives:1
 ## Stage 3
 
 # Turn on the GAME
-playGame:1
+playGame: 1

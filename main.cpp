@@ -48,7 +48,8 @@ int main(int argc, char *argv[])
         // Initialise scene
         TableScene *table = TableScene::instance(the_reader->getBoxWidth(),
                                                  the_reader->getBoxHeight(),
-                                                 the_reader->getTableColor());
+                                                 the_reader->getTableColor(),
+                                                 the_reader->getPlayGame());
 
         // Add ball
         table->addBall(new Ball(  QPoint(the_reader->getBallX(), the_reader->getBallY()),
