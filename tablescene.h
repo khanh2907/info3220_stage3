@@ -10,6 +10,7 @@
 #include "ball.h"
 #include "brick.h"
 #include "paddle.h"
+#include "player.h"
 
 class TableScene : public QGraphicsScene
 {
@@ -32,6 +33,8 @@ public:
     Paddle * getPaddle();
 
     bool getPlayGame();
+    void setPlayer(Player * player);
+    Player * getPlayer();
 
     virtual ~TableScene();
 
@@ -45,6 +48,7 @@ protected:
 
     virtual void keyPressEvent (QKeyEvent *event);
     virtual void mouseMoveEvent(QGraphicsSceneMouseEvent *event);
+    virtual void mousePressEvent(QGraphicsSceneMouseEvent *event);
 
 private:
     TableScene();
@@ -56,6 +60,7 @@ private:
     std::vector<Brick *> m_bricks; /*!< Vector of pointers to bricks */
     Paddle * m_paddle;
     bool m_playGame;
+    Player * m_player;
 
 signals:
 

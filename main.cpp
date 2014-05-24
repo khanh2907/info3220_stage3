@@ -19,6 +19,7 @@
 #include <vector>
 #include <QErrorMessage>
 #include "paddle.h"
+#include "player.h"
 
 int main(int argc, char *argv[])
 {
@@ -52,11 +53,13 @@ int main(int argc, char *argv[])
                                                  the_reader->getPlayGame());
 
         // Add ball
-        table->addBall(new Ball(  QPoint(the_reader->getBallX(), the_reader->getBallY()),
-                                  the_reader->getBallRadius(),
-                                  the_reader->getBallXSpeed(),
-                                  the_reader->getBallYSpeed(),
-                                  the_reader->getBallColor()));
+        if (!the_reader->getPlayGame()) {
+            table->addBall(new Ball(  QPoint(the_reader->getBallX(), the_reader->getBallY()),
+                                      the_reader->getBallRadius(),
+                                      the_reader->getBallXSpeed(),
+                                      the_reader->getBallYSpeed(),
+                                      the_reader->getBallColor()));
+        }
 
         // Add bricks
         foreach (ConfigReader::brickConfig brick, the_reader->getBricks()) {
@@ -68,7 +71,21 @@ int main(int argc, char *argv[])
 
         // Add paddle
         if (the_reader->getPlayGame()) {
-            table->addPaddle(new Paddle (QRectF(0, 550, 100, 10)));
+            table->setPlayer(new Player(3));
+            Paddle * paddle = new Paddle (QRectF(0, 550, 100, 10));
+
+            table->addPaddle(paddle);
+
+            unsigned int radius = the_reader->getBallRadius();
+
+            qreal startBallX = paddle->boundingRect().right() + paddle->boundingRect().width()/2 - radius;
+            qreal startBallY = paddle->boundingRect().top() - radius*2;
+
+            table->addBall(new Ball(  QPoint(startBallX, startBallY),
+                                      the_reader->getBallRadius(),
+                                      0,
+                                      0,
+                                      the_reader->getBallColor()));
         }
 
         table->startAnimation(the_reader->getFramerate());

@@ -83,6 +83,7 @@ void TableScene::keyPressEvent (QKeyEvent *e) {
 
 void TableScene::mouseMoveEvent(QGraphicsSceneMouseEvent *e){
     if (m_playGame){
+        // move the paddle
         Paddle * paddle = this->getPaddle();
         qreal paddleWidth = paddle->boundingRect().width();
         qreal paddleY = paddle->pos().y();
@@ -96,6 +97,18 @@ void TableScene::mouseMoveEvent(QGraphicsSceneMouseEvent *e){
             paddle->setX(this->width()-paddleWidth);
         else
             paddle->setPos(mouseX - paddleWidth/2, paddleY);
+
+
+    }
+}
+
+void TableScene::mousePressEvent(QGraphicsSceneMouseEvent *e) {
+    if (m_playGame) {
+        if (!m_player->getRoundStarted()) {
+            std::cout << "launch!" << std::endl;
+            m_ball->setYVelocity(5);
+            m_player->setRoundStarted(true);
+        }
     }
 }
 
@@ -220,4 +233,12 @@ Paddle * TableScene::getPaddle() {
 
 bool TableScene::getPlayGame() {
     return m_playGame;
+}
+
+void TableScene::setPlayer(Player *player) {
+    m_player = player;
+}
+
+Player * TableScene::getPlayer() {
+    return m_player;
 }

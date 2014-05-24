@@ -138,11 +138,24 @@ void Ball::advance(int step) {
         return;
     }
 
+    QPointF coordinate = mapToParent(0 + m_xVelocity, 0 + m_yVelocity);
+
     TableScene * tablescene = dynamic_cast<TableScene *>(scene());
 
     bool playGameOn = tablescene->getPlayGame();
 
-    QPointF coordinate = mapToParent(0 + m_xVelocity, 0 + m_yVelocity);
+
+    // move the ball sitting on the paddle
+    if (playGameOn) {
+        if (!tablescene->getPlayer()->getRoundStarted()){
+            Paddle * paddle = tablescene->getPaddle();
+            qreal newBallX = paddle->sceneBoundingRect().center().x() - m_radius;
+            qreal newBallY = paddle->sceneBoundingRect().top() - m_radius*2;
+
+            coordinate.setX(newBallX);
+            coordinate.setY(newBallY);
+        }
+    }
 
     bool x_collided = false;
     bool y_collided = false;
@@ -156,31 +169,36 @@ void Ball::advance(int step) {
         }
         else {
 
-            QApplication::setOverrideCursor(Qt::ArrowCursor);
+            if (tablescene->getPlayer()->decrementLife() <= 0) {
+                QApplication::setOverrideCursor(Qt::ArrowCursor);
 
-            QMessageBox msgBox;
-            msgBox.setText("GGWP!");
-            msgBox.setInformativeText("You scored 9999!");
-            msgBox.addButton("Play Again", QMessageBox::YesRole);
-            msgBox.addButton("Submit Highscore", QMessageBox::ApplyRole);
-            msgBox.addButton("Exit", QMessageBox::NoRole);
-            msgBox.setIcon(QMessageBox::Information);
-            msgBox.exec();
+                QMessageBox msgBox;
+                msgBox.setText("GGWP!");
+                msgBox.setInformativeText("You scored 9999!");
+                msgBox.addButton("Play Again", QMessageBox::YesRole);
+                msgBox.addButton("Submit Highscore", QMessageBox::ApplyRole);
+                msgBox.addButton("Exit", QMessageBox::NoRole);
+                msgBox.setIcon(QMessageBox::Information);
+                msgBox.exec();
 
 
-            if (msgBox.buttonRole(msgBox.clickedButton()) == QMessageBox::YesRole){
-                //decrement life - TODO create player object
-                // RESTART GAME
+                if (msgBox.buttonRole(msgBox.clickedButton()) == QMessageBox::YesRole){
+                    //decrement life - TODO create player object
+                    // RESTART GAME
+                }
+                else if (msgBox.buttonRole(msgBox.clickedButton()) == QMessageBox::ApplyRole) {
+                    // TODO;
+                    QCoreApplication::instance()->exit();
+                }
+                else if (msgBox.buttonRole(msgBox.clickedButton()) == QMessageBox::NoRole) {
+                    QCoreApplication::instance()->exit();
+                }
             }
-            else if (msgBox.buttonRole(msgBox.clickedButton()) == QMessageBox::ApplyRole) {
-                // TODO;
-                QCoreApplication::instance()->exit();
+            else {
+                coordinate.setX(300);
+                coordinate.setY(300);
+                tablescene->getPlayer()->setRoundStarted(false);
             }
-            else if (msgBox.buttonRole(msgBox.clickedButton()) == QMessageBox::NoRole) {
-                QCoreApplication::instance()->exit();
-            }
-
-
 
         }
     }
@@ -275,6 +293,8 @@ void Ball::advance(int step) {
                    y_collided = true;
                    coordinate.setY(paddleTop - diameter);
                 }
+
+                // determine new velocity
 
             }
         }

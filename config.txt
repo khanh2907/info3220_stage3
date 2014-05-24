@@ -70,7 +70,7 @@ brick:520:230:50:20:2:0:0x8DF400
 # re-appear in the box. This inclues bricks that have already been destroyed,
 # and bricks that
 
-enableBrickRegenerate:0
+enableBrickRegenerate:1
 
 # Probability (per frame) that a given brick will re-appear
 

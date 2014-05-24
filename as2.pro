@@ -19,7 +19,8 @@ SOURCES += main.cpp\
     tableview.cpp \
     as1ball.cpp \
     brick.cpp \
-    paddle.cpp
+    paddle.cpp \
+    player.cpp
 
 HEADERS  += \
     coordinate.h \
@@ -29,7 +30,8 @@ HEADERS  += \
     tablescene.h \
     as1ball.h \
     brick.h \
-    paddle.h
+    paddle.h \
+    player.h
 
 OTHER_FILES += \
     config.txt
