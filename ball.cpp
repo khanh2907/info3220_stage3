@@ -308,22 +308,25 @@ void Ball::advance(int step) {
 
                          // if it is inside then check which side the ball is going to hit
                         // then send it back the other way
-                        if (currentXPos + diameter <= paddleLeft) {
-                           x_collided = true;
-                           coordinate.setX(paddleLeft - diameter);
-                        }
-                        if (currentXPos >= paddleRight) {
-                           x_collided = true;
-                           coordinate.setX(paddleRight);
-                        }
+
                         if (currentYPos + diameter <= paddleTop) {
                            y_collided = true;
                            coordinate.setY(paddleTop - diameter);
-                           if (coordinate.x() + m_radius < paddle->sceneBoundingRect().center().x() - paddle->sceneBoundingRect().width()/4) {
+
+                           qreal paddleCenter = paddle->sceneBoundingRect().center().x();
+                           qreal paddleWidth = paddle->sceneBoundingRect().width();
+
+                           if (coordinate.x() + m_radius < paddleCenter - paddleWidth/3) {
                                setXVelocity(-5);
                            }
-                           else if (coordinate.x() + m_radius > paddle->sceneBoundingRect().center().x() + paddle->sceneBoundingRect().width()/4) {
+                           else if (coordinate.x() + m_radius > paddleCenter + paddleWidth/3) {
                                setXVelocity(5);
+                           }
+                           else if (coordinate.x() + m_radius < paddleCenter - paddleWidth/6 && coordinate.x() + m_radius >= paddleCenter - paddleWidth/3) {
+                               setXVelocity(-3);
+                           }
+                           else if (coordinate.x() + m_radius > paddleCenter + paddleWidth/6 && coordinate.x() + m_radius <= paddleCenter + paddleWidth/3) {
+                               setXVelocity(3);
                            }
                         }
                     }
