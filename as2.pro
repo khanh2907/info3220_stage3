@@ -20,7 +20,8 @@ SOURCES += main.cpp\
     as1ball.cpp \
     brick.cpp \
     paddle.cpp \
-    player.cpp
+    player.cpp \
+    overlayobject.cpp
 
 HEADERS  += \
     coordinate.h \
@@ -31,7 +32,8 @@ HEADERS  += \
     as1ball.h \
     brick.h \
     paddle.h \
-    player.h
+    player.h \
+    overlayobject.h
 
 OTHER_FILES += \
     config.txt

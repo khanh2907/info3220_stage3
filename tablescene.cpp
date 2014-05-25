@@ -106,7 +106,7 @@ void TableScene::mousePressEvent(QGraphicsSceneMouseEvent *e) {
     if (m_playGame) {
         if (!m_player->getRoundStarted()) {
             std::cout << "launch!" << std::endl;
-            m_ball->setYVelocity(5);
+            m_ball->setYVelocity(-5);
             m_player->setRoundStarted(true);
         }
     }
@@ -217,6 +217,17 @@ TableScene & TableScene::addBrick(Brick *brick) {
  */
 std::vector<Brick *> & TableScene::getBricks()  {
     return m_bricks;
+}
+
+TableScene & TableScene::addOverlayObject(OverlayObject *overlay) {
+    m_overlays.push_back(overlay);
+    this->addItem(overlay);
+
+    return *this;
+}
+
+std::vector<OverlayObject *> & TableScene::getOverlayObjects() {
+    return m_overlays;
 }
 
 TableScene & TableScene::addPaddle(Paddle *paddle){

@@ -10,6 +10,7 @@
 #include "tablescene.h"
 #include <QMessageBox>
 #include <QApplication>
+#include "overlayobject.h"
 
 using namespace std;
 
@@ -150,7 +151,7 @@ void Ball::advance(int step) {
         if (!tablescene->getPlayer()->getRoundStarted()){
             Paddle * paddle = tablescene->getPaddle();
             qreal newBallX = paddle->sceneBoundingRect().center().x() - m_radius;
-            qreal newBallY = paddle->sceneBoundingRect().top() - m_radius*2;
+            qreal newBallY = paddle->sceneBoundingRect().top() - m_radius*2 - 1;
 
             coordinate.setX(newBallX);
             coordinate.setY(newBallY);
@@ -168,8 +169,16 @@ void Ball::advance(int step) {
             y_collided = true;
         }
         else {
+            qreal current_life = tablescene->getPlayer()->decrementLife();
+            std::stringstream ss;
+            ss << "Lives: " << current_life;
 
-            if (tablescene->getPlayer()->decrementLife() <= 0) {
+            OverlayObject * livesOverlay = tablescene->getOverlayObjects().at(0);
+
+            livesOverlay->setText(QString::fromStdString(ss.str()));
+            livesOverlay->update();
+
+            if (current_life <= 0) {
                 QApplication::setOverrideCursor(Qt::ArrowCursor);
 
                 QMessageBox msgBox;
@@ -197,6 +206,8 @@ void Ball::advance(int step) {
             else {
                 coordinate.setX(300);
                 coordinate.setY(300);
+                setXVelocity(0);
+                setYVelocity(0);
                 tablescene->getPlayer()->setRoundStarted(false);
             }
 
@@ -266,36 +277,55 @@ void Ball::advance(int step) {
 
                 // reduce brick life by one
                 thisBrick->decLife();
+                if (playGameOn) {
+                    qreal currentScore = tablescene->getPlayer()->increaseScore(1);
+
+                    std::stringstream ss;
+                    ss << "Score: " << currentScore;
+
+                    OverlayObject * scoreOverlay = tablescene->getOverlayObjects().at(2);
+
+                    scoreOverlay->setText(QString::fromStdString(ss.str()));
+                    scoreOverlay->update();
+
+                }
 
             }
         }
 
-        Paddle * paddle = dynamic_cast<Paddle *>(item);
+        if (playGameOn) {
+            if (tablescene->getPlayer()->getRoundStarted()) {
+                Paddle * paddle = dynamic_cast<Paddle *>(item);
 
-        if (paddle != NULL) {
-            qreal paddleTop = paddle->sceneBoundingRect().top();
-            qreal paddleLeft = paddle->sceneBoundingRect().left();
-            qreal paddleRight = paddle->sceneBoundingRect().right();
+                if (paddle != NULL) {
+                    qreal paddleTop = paddle->sceneBoundingRect().top();
+                    qreal paddleLeft = paddle->sceneBoundingRect().left();
+                    qreal paddleRight = paddle->sceneBoundingRect().right();
 
-            if (futureBallLeft <= paddleRight && futureBallRight >= paddleLeft && futureBallBottom >= paddleTop) {
+                    if (futureBallLeft <= paddleRight && futureBallRight >= paddleLeft && futureBallBottom >= paddleTop) {
 
-                 // if it is inside then check which side the ball is going to hit
-                // then send it back the other way
-                if (currentXPos + diameter <= paddleLeft) {
-                   x_collided = true;
-                   coordinate.setX(paddleLeft - diameter);
+                         // if it is inside then check which side the ball is going to hit
+                        // then send it back the other way
+                        if (currentXPos + diameter <= paddleLeft) {
+                           x_collided = true;
+                           coordinate.setX(paddleLeft - diameter);
+                        }
+                        if (currentXPos >= paddleRight) {
+                           x_collided = true;
+                           coordinate.setX(paddleRight);
+                        }
+                        if (currentYPos + diameter <= paddleTop) {
+                           y_collided = true;
+                           coordinate.setY(paddleTop - diameter);
+                           if (coordinate.x() + m_radius < paddle->sceneBoundingRect().center().x() - paddle->sceneBoundingRect().width()/4) {
+                               setXVelocity(-5);
+                           }
+                           else if (coordinate.x() + m_radius > paddle->sceneBoundingRect().center().x() + paddle->sceneBoundingRect().width()/4) {
+                               setXVelocity(5);
+                           }
+                        }
+                    }
                 }
-                else if (currentXPos >= paddleRight) {
-                   x_collided = true;
-                   coordinate.setX(paddleRight);
-                }
-                if (currentYPos + diameter <= paddleTop) {
-                   y_collided = true;
-                   coordinate.setY(paddleTop - diameter);
-                }
-
-                // determine new velocity
-
             }
         }
 

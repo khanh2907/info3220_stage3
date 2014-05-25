@@ -1,6 +1,6 @@
 boxWidth:600
 boxHeight:600
-ballRadius:10
+ballRadius:5
 ballX:300
 ballY:400
 ballXSpeed:-6
@@ -8,7 +8,7 @@ ballYSpeed:7
 
 tableColor:0xfffff0
 ballColor:0xda063b
-framerate:70
+framerate:100
 
 ## Brick and layout definition
 

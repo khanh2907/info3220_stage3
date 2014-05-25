@@ -20,6 +20,7 @@
 #include <QErrorMessage>
 #include "paddle.h"
 #include "player.h"
+#include "overlayobject.h"
 
 int main(int argc, char *argv[])
 {
@@ -72,6 +73,12 @@ int main(int argc, char *argv[])
         // Add paddle
         if (the_reader->getPlayGame()) {
             table->setPlayer(new Player(3));
+
+
+            table->addOverlayObject(new OverlayObject(QRectF(280, 580, 100, 20), true, "lives","Lives: 3"));
+            table->addOverlayObject(new OverlayObject(QRectF(380, 580, 100, 20), true, "level","Level: 1"));
+            table->addOverlayObject(new OverlayObject(QRectF(480, 580, 100, 20), true, "score","Score: 0"));
+
             Paddle * paddle = new Paddle (QRectF(0, 550, 100, 10));
 
             table->addPaddle(paddle);
@@ -79,7 +86,7 @@ int main(int argc, char *argv[])
             unsigned int radius = the_reader->getBallRadius();
 
             qreal startBallX = paddle->boundingRect().right() + paddle->boundingRect().width()/2 - radius;
-            qreal startBallY = paddle->boundingRect().top() - radius*2;
+            qreal startBallY = paddle->boundingRect().top() - radius*2 - 1;
 
             table->addBall(new Ball(  QPoint(startBallX, startBallY),
                                       the_reader->getBallRadius(),

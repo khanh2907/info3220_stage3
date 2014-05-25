@@ -11,6 +11,7 @@
 #include "brick.h"
 #include "paddle.h"
 #include "player.h"
+#include "overlayobject.h"
 
 class TableScene : public QGraphicsScene
 {
@@ -31,6 +32,9 @@ public:
 
     TableScene & addPaddle(Paddle *paddle);
     Paddle * getPaddle();
+
+    TableScene & addOverlayObject(OverlayObject *overlay);
+    std::vector<OverlayObject *> & getOverlayObjects();
 
     bool getPlayGame();
     void setPlayer(Player * player);
@@ -61,6 +65,7 @@ private:
     Paddle * m_paddle;
     bool m_playGame;
     Player * m_player;
+    std::vector<OverlayObject *> m_overlays;
 
 signals:
 
