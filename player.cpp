@@ -2,7 +2,7 @@
 
 Player::Player(int lives) : m_lives(lives),
     m_score(0),
-    m_currentLevel(0),
+    m_currentLevel(1),
     m_roundStarted(false)
 {}
 

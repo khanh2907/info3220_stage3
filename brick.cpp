@@ -2,6 +2,7 @@
 #include "configreader.h"
 #include <sstream>
 #include <QGraphicsScene>
+#include "tablescene.h"
 
 //! Brick constructor
 Brick::Brick(const QRectF &rect,
@@ -48,20 +49,24 @@ void Brick::advance(int step) {
         return;
     }
 
+    TableScene * tableScene = dynamic_cast<TableScene *>(scene());
+
     if (m_lives <= 0) {
         this->setVisible(false);
-        scene()->removeItem(this);
-        this->deleteLater();
+        tableScene->removeBrick(this);
     }
 
-    ConfigReader *the_reader = ConfigReader::getInstance();
+    if (!tableScene->getPlayGame()) {
 
-    if (the_reader->getEnableBrickRegenerate() && !this->isVisible()) {
-        float rand_val = ((float) rand()) / (float) RAND_MAX; // random float between 0 and 1
-        if (rand_val < the_reader->getRegeneratedBrickProbability()) {
-            this->setVisible(true);
-            this->m_lives = (rand() % the_reader->getRegeneratedBrickMaxLives()) + 1;
-            m_fillBrush = QBrush(the_reader->getRegeneratedBrickColor());
+        ConfigReader *the_reader = ConfigReader::getInstance();
+
+        if (the_reader->getEnableBrickRegenerate() && !this->isVisible()) {
+            float rand_val = ((float) rand()) / (float) RAND_MAX; // random float between 0 and 1
+            if (rand_val < the_reader->getRegeneratedBrickProbability()) {
+                this->setVisible(true);
+                this->m_lives = (rand() % the_reader->getRegeneratedBrickMaxLives()) + 1;
+                m_fillBrush = QBrush(the_reader->getRegeneratedBrickColor());
+            }
         }
     }
 

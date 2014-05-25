@@ -21,7 +21,8 @@ SOURCES += main.cpp\
     brick.cpp \
     paddle.cpp \
     player.cpp \
-    overlayobject.cpp
+    overlayobject.cpp \
+    levelgenerator.cpp
 
 HEADERS  += \
     coordinate.h \
@@ -33,7 +34,8 @@ HEADERS  += \
     brick.h \
     paddle.h \
     player.h \
-    overlayobject.h
+    overlayobject.h \
+    levelgenerator.h
 
 OTHER_FILES += \
     config.txt

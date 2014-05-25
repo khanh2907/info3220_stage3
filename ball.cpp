@@ -287,12 +287,9 @@ void Ball::advance(int step) {
 
                     std::stringstream ss;
                     ss << "Score: " << currentScore;
-
                     OverlayObject * scoreOverlay = tablescene->getOverlayObjects().at(2);
-
                     scoreOverlay->setText(QString::fromStdString(ss.str()));
                     scoreOverlay->update();
-
                 }
 
             }

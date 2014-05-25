@@ -106,7 +106,6 @@ void TableScene::mouseMoveEvent(QGraphicsSceneMouseEvent *e){
 void TableScene::mousePressEvent(QGraphicsSceneMouseEvent *e) {
     if (m_playGame) {
         if (!m_player->getRoundStarted()) {
-            std::cout << "launch!" << std::endl;
             m_ball->setYVelocity(-5);
             m_player->setRoundStarted(true);
         }
@@ -202,7 +201,8 @@ TableScene & TableScene::addBrick(Brick *brick) {
     m_bricks.push_back(brick);
     this->addItem(brick);
 
-    if (brick->collidingItems().size() > 0) {
+
+    if (brick->collidingItems().size() > 0 && !m_playGame) {
         this->removeItem(brick);
         delete brick;
     }
@@ -218,6 +218,38 @@ TableScene & TableScene::addBrick(Brick *brick) {
  */
 std::vector<Brick *> & TableScene::getBricks()  {
     return m_bricks;
+}
+
+TableScene & TableScene::removeBrick(Brick *brick) {
+
+    this->removeItem(brick);
+
+    std::vector<Brick *>::iterator idx = std::find(m_bricks.begin(), m_bricks.end(), brick);
+
+    if (idx != m_bricks.end()) {
+        m_bricks.erase(idx);
+    }
+
+    delete brick;
+
+    if (m_bricks.size() == 0) {
+        // level completed
+
+        m_ball->setXVelocity(0);
+        m_ball->setYVelocity(0);
+        m_player->setRoundStarted(false);
+
+        generateLevel();
+
+        std::stringstream ss;
+        ss << "Level: " << m_player->increaseCurrentLevel();
+        OverlayObject * levelOverlay = getOverlayObjects().at(1);
+        levelOverlay->setText(QString::fromStdString(ss.str()));
+        levelOverlay->update();
+
+    }
+
+    return *this;
 }
 
 TableScene & TableScene::addOverlayObject(OverlayObject *overlay) {
@@ -253,6 +285,17 @@ void TableScene::setPlayer(Player *player) {
 
 Player * TableScene::getPlayer() {
     return m_player;
+}
+
+void TableScene::generateLevel() {
+    LevelGenerator lvlGen(this->width(), this->height());
+
+    std::vector<Brick *> levelBricks = lvlGen.generate(m_player->getCurrentLevel());
+
+    for (int i = 0; i < levelBricks.size(); i++) {
+        this->addBrick(levelBricks[i]);
+    }
+
 }
 
 void TableScene::restartGame() {

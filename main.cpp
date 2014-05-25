@@ -21,6 +21,7 @@
 #include "paddle.h"
 #include "player.h"
 #include "overlayobject.h"
+#include "levelgenerator.h"
 
 int main(int argc, char *argv[])
 {
@@ -53,34 +54,38 @@ int main(int argc, char *argv[])
                                                  the_reader->getTableColor(),
                                                  the_reader->getPlayGame());
 
-        // Add ball
+
         if (!the_reader->getPlayGame()) {
+            // Add ball
             table->addBall(new Ball(  QPoint(the_reader->getBallX(), the_reader->getBallY()),
                                       the_reader->getBallRadius(),
                                       the_reader->getBallXSpeed(),
                                       the_reader->getBallYSpeed(),
                                       the_reader->getBallColor()));
+
+            // Add bricks
+            foreach (ConfigReader::brickConfig brick, the_reader->getBricks()) {
+                table->addBrick(new Brick( QRectF(brick.x, brick.y, brick.width, brick.height),
+                                           brick.lives,
+                                           brick.visible,
+                                           QBrush(brick.color)));
+            }
         }
 
-        // Add bricks
-        foreach (ConfigReader::brickConfig brick, the_reader->getBricks()) {
-            table->addBrick(new Brick( QRectF(brick.x, brick.y, brick.width, brick.height),
-                                       brick.lives,
-                                       brick.visible,
-                                       QBrush(brick.color)));
-        }
 
-        // Add paddle
+
+
         if (the_reader->getPlayGame()) {
             table->setPlayer(new Player(3));
-
 
             table->addOverlayObject(new OverlayObject(QRectF(280, 0, 100, 20), true, "lives","Lives: 3"));
             table->addOverlayObject(new OverlayObject(QRectF(380, 0, 100, 20), true, "level","Level: 1"));
             table->addOverlayObject(new OverlayObject(QRectF(480, 0, 100, 20), true, "score","Score: 0"));
 
-            Paddle * paddle = new Paddle (QRectF(0, 550, 100, 10));
 
+
+            // Add paddle
+            Paddle * paddle = new Paddle (QRectF(0, 550, 100, 10));
             table->addPaddle(paddle);
 
             unsigned int radius = the_reader->getBallRadius();
@@ -93,6 +98,8 @@ int main(int argc, char *argv[])
                                       0,
                                       0,
                                       the_reader->getBallColor()));
+
+            table->generateLevel();
         }
 
         table->startAnimation(the_reader->getFramerate());

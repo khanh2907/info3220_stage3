@@ -12,6 +12,7 @@
 #include "paddle.h"
 #include "player.h"
 #include "overlayobject.h"
+#include "levelgenerator.h"
 
 class TableScene : public QGraphicsScene
 {
@@ -29,6 +30,7 @@ public:
 
     TableScene & addBrick(Brick *brick);
     std::vector<Brick *> & getBricks();
+    TableScene & removeBrick(Brick *brick);
 
     TableScene & addPaddle(Paddle *paddle);
     Paddle * getPaddle();
@@ -40,6 +42,7 @@ public:
     void setPlayer(Player * player);
     Player * getPlayer();
 
+    void generateLevel();
     void restartGame();
 
     virtual ~TableScene();
@@ -68,6 +71,7 @@ private:
     bool m_playGame;
     Player * m_player;
     std::vector<OverlayObject *> m_overlays;
+
 
 signals:
 
