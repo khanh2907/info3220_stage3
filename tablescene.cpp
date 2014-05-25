@@ -4,6 +4,7 @@
 #include <QKeyEvent>
 #include <QGraphicsSceneMouseEvent>
 #include <QApplication>
+#include <QThread>
 
 /*!
  * \brief TableScene constructor
@@ -252,4 +253,25 @@ void TableScene::setPlayer(Player *player) {
 
 Player * TableScene::getPlayer() {
     return m_player;
+}
+
+void TableScene::restartGame() {
+
+    m_player->resetStats();
+
+    for (int i = 0; i < m_overlays.size(); i++) {
+        m_overlays.at(i)->restoreDefaultText();
+    }
+
+    this->removeItem(m_ball);
+    qreal startBallX = m_paddle->boundingRect().right() + m_paddle->boundingRect().width()/2 - m_ball->getRadius();
+    qreal startBallY = m_paddle->boundingRect().top() - m_ball->getRadius()*2 - 1;
+
+    m_ball->setCoordinate(QPointF(startBallX, startBallY));
+    this->addItem(m_ball);
+
+    m_ball->setXVelocity(0);
+    m_ball->setYVelocity(0);
+
+    m_player->setRoundStarted(false);
 }

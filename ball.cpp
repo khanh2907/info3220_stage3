@@ -169,46 +169,51 @@ void Ball::advance(int step) {
             y_collided = true;
         }
         else {
-            qreal current_life = tablescene->getPlayer()->decrementLife();
-            std::stringstream ss;
-            ss << "Lives: " << current_life;
+            if (tablescene->getPlayer()->getRoundStarted()){
+                qreal current_life = tablescene->getPlayer()->decrementLife();
+                std::stringstream ss;
+                ss << "Lives: " << current_life;
 
-            OverlayObject * livesOverlay = tablescene->getOverlayObjects().at(0);
+                OverlayObject * livesOverlay = tablescene->getOverlayObjects().at(0);
 
-            livesOverlay->setText(QString::fromStdString(ss.str()));
-            livesOverlay->update();
+                livesOverlay->setText(QString::fromStdString(ss.str()));
+                livesOverlay->update();
 
-            if (current_life <= 0) {
-                QApplication::setOverrideCursor(Qt::ArrowCursor);
+                if (current_life <= 0) {
+                    QApplication::setOverrideCursor(Qt::ArrowCursor);
 
-                QMessageBox msgBox;
-                msgBox.setText("GGWP!");
-                msgBox.setInformativeText("You scored 9999!");
-                msgBox.addButton("Play Again", QMessageBox::YesRole);
-                msgBox.addButton("Submit Highscore", QMessageBox::ApplyRole);
-                msgBox.addButton("Exit", QMessageBox::NoRole);
-                msgBox.setIcon(QMessageBox::Information);
-                msgBox.exec();
+                    std::stringstream scoreSS;
+                    scoreSS << "You scored " << tablescene->getPlayer()->getScore() << " points.";
+
+                    QMessageBox msgBox;
+                    msgBox.setText("GGWP!");
+                    msgBox.setInformativeText(QString::fromStdString(scoreSS.str()));
+                    msgBox.addButton("Play Again", QMessageBox::YesRole);
+                    msgBox.addButton("Submit Score", QMessageBox::ApplyRole);
+                    msgBox.addButton("Exit", QMessageBox::NoRole);
+                    msgBox.exec();
 
 
-                if (msgBox.buttonRole(msgBox.clickedButton()) == QMessageBox::YesRole){
-                    //decrement life - TODO create player object
-                    // RESTART GAME
+                    if (msgBox.buttonRole(msgBox.clickedButton()) == QMessageBox::YesRole){
+                        //decrement life - TODO create player object
+                        tablescene->getPlayer()->setRoundStarted(false);
+                        tablescene->restartGame();
+                    }
+                    else if (msgBox.buttonRole(msgBox.clickedButton()) == QMessageBox::ApplyRole) {
+                        // TODO;
+                        QCoreApplication::instance()->exit();
+                    }
+                    else if (msgBox.buttonRole(msgBox.clickedButton()) == QMessageBox::NoRole) {
+                        QCoreApplication::instance()->exit();
+                    }
                 }
-                else if (msgBox.buttonRole(msgBox.clickedButton()) == QMessageBox::ApplyRole) {
-                    // TODO;
-                    QCoreApplication::instance()->exit();
+                else {
+                    coordinate.setX(300);
+                    coordinate.setY(300);
+                    setXVelocity(0);
+                    setYVelocity(0);
+                    tablescene->getPlayer()->setRoundStarted(false);
                 }
-                else if (msgBox.buttonRole(msgBox.clickedButton()) == QMessageBox::NoRole) {
-                    QCoreApplication::instance()->exit();
-                }
-            }
-            else {
-                coordinate.setX(300);
-                coordinate.setY(300);
-                setXVelocity(0);
-                setYVelocity(0);
-                tablescene->getPlayer()->setRoundStarted(false);
             }
 
         }

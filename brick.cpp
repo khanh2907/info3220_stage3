@@ -52,7 +52,6 @@ void Brick::advance(int step) {
         this->setVisible(false);
         scene()->removeItem(this);
         this->deleteLater();
-
     }
 
     ConfigReader *the_reader = ConfigReader::getInstance();

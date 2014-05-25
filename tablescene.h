@@ -40,6 +40,8 @@ public:
     void setPlayer(Player * player);
     Player * getPlayer();
 
+    void restartGame();
+
     virtual ~TableScene();
 
 protected:

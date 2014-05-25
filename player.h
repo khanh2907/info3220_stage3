@@ -16,6 +16,8 @@ public:
     int increaseCurrentLevel();
     bool setRoundStarted(bool val);
 
+    void resetStats();
+
 private:
     int m_lives;
     int m_score;

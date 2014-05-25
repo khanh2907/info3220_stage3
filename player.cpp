@@ -40,3 +40,9 @@ int Player::increaseCurrentLevel() {
 bool Player::setRoundStarted(bool val) {
     m_roundStarted = val;
 }
+
+void Player::resetStats() {
+    m_score = 0;
+    m_lives = 3;
+    m_currentLevel = 1;
+}

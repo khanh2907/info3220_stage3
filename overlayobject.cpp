@@ -3,7 +3,8 @@
 OverlayObject::OverlayObject(const QRectF &rect, bool visible, QString title, QString text) :
     QGraphicsRectItem(rect),
     m_title(title),
-    m_text(text)
+    m_text(text),
+    m_defaultText(text)
 {
     this->setVisible(visible);
 }
@@ -22,4 +23,8 @@ void OverlayObject::paint(QPainter *painter, const QStyleOptionGraphicsItem *opt
 
 void OverlayObject::setText(QString newText) {
     m_text = newText;
+}
+
+void OverlayObject::restoreDefaultText() {
+    m_text = m_defaultText;
 }

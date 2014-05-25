@@ -75,9 +75,9 @@ int main(int argc, char *argv[])
             table->setPlayer(new Player(3));
 
 
-            table->addOverlayObject(new OverlayObject(QRectF(280, 580, 100, 20), true, "lives","Lives: 3"));
-            table->addOverlayObject(new OverlayObject(QRectF(380, 580, 100, 20), true, "level","Level: 1"));
-            table->addOverlayObject(new OverlayObject(QRectF(480, 580, 100, 20), true, "score","Score: 0"));
+            table->addOverlayObject(new OverlayObject(QRectF(280, 0, 100, 20), true, "lives","Lives: 3"));
+            table->addOverlayObject(new OverlayObject(QRectF(380, 0, 100, 20), true, "level","Level: 1"));
+            table->addOverlayObject(new OverlayObject(QRectF(480, 0, 100, 20), true, "score","Score: 0"));
 
             Paddle * paddle = new Paddle (QRectF(0, 550, 100, 10));
 

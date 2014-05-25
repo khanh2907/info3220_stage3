@@ -11,6 +11,8 @@ public:
 
     void setText(QString newText);
 
+    void restoreDefaultText();
+
 protected:
     virtual void advance(int step);
 
@@ -21,6 +23,7 @@ protected:
 private:
     QString m_title;
     QString m_text;
+    QString m_defaultText;
 };
 
 #endif // OVERLAYOBJECT_H
