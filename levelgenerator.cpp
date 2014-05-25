@@ -10,7 +10,7 @@ std::vector<Brick *> LevelGenerator::generate(int level) {
 
     srand(time(NULL));
 
-    int numOfBricks = 5 * level;
+    int numOfBricks = 30 * level;
 
     int width = 50;
     int height = 20;
