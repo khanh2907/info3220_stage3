@@ -5,6 +5,11 @@
 #include <QGraphicsSceneMouseEvent>
 #include <QApplication>
 #include <QThread>
+#include <time.h>
+#include "powerup.h"
+#include "ballpowerbonus.h"
+#include "ballsizebonus.h"
+#include "extralife.h"
 
 /*!
  * \brief TableScene constructor
@@ -238,7 +243,7 @@ TableScene & TableScene::removeBrick(Brick *brick) {
         m_ball->setXVelocity(0);
         m_ball->setYVelocity(0);
         m_player->setRoundStarted(false);
-
+        resetPowerUps();
         generateLevel();
 
         std::stringstream ss;
@@ -308,6 +313,7 @@ void TableScene::generateLevel() {
 void TableScene::restartGame() {
 
     m_player->resetStats();
+    resetPowerUps();
 
     for (int i = 0; i < m_overlays.size(); i++) {
         m_overlays.at(i)->restoreDefaultText();
@@ -320,8 +326,38 @@ void TableScene::restartGame() {
     m_ball->setCoordinate(QPointF(startBallX, startBallY));
     this->addItem(m_ball);
 
+    for (int i = 0; i < m_bricks.size(); i++) {
+        delete m_bricks[i];
+    }
+
+    m_bricks.clear();
+
+    generateLevel();
+
     m_ball->setXVelocity(0);
     m_ball->setYVelocity(0);
 
     m_player->setRoundStarted(false);
+}
+
+void TableScene::addPowerup(qreal x, qreal y) {
+    if (rand()%6 == 0) {
+        int randBonus = rand()%3;
+        QRectF rect = QRectF(x, 0, 45, 15);
+        if (randBonus == 0) {
+            this->addItem(new BallPowerBonus(rect, "POWER", 1, QBrush(Qt::yellow)));
+        }
+        else if (randBonus == 1) {
+            if (m_ball->getRadius() < 15)
+                this->addItem(new BallSizeBonus(rect, "SIZE", 1, QBrush(Qt::magenta)));
+        }
+        else if (randBonus == 2) {
+            this->addItem(new ExtraLife(rect, "LIFE", 1, QBrush(Qt::red)));
+        }
+    }
+}
+
+void TableScene::resetPowerUps() {
+    m_ball->restoreDefaultRadius();
+    m_ball->setPower(1);
 }

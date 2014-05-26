@@ -31,24 +31,21 @@ void PowerUp::advance(int step) {
     }
 
     qreal currentY = this->pos().y();
-
     qreal newY = currentY + m_dropVelocity;
 
     TableScene * tableScene = dynamic_cast<TableScene *>(scene());
 
-    if (tableScene != NULL) {
-        Paddle * paddle = tableScene->getPaddle();
-        qreal paddleTop = paddle->sceneBoundingRect().top();
-        qreal paddleLeft = paddle->sceneBoundingRect().left();
-        qreal paddleRight = paddle->sceneBoundingRect().right();
+    Paddle * paddle = tableScene->getPaddle();
+    QRectF rect = paddle->sceneBoundingRect();
+    qreal paddleTop = rect.top();
+    qreal paddleLeft = rect.left();
+    qreal paddleRight = rect.right();
 
-        if (this->sceneBoundingRect().left() <= paddleRight && this->sceneBoundingRect().right() >= paddleLeft && newY + this->sceneBoundingRect().height() >= paddleTop) {
-            applyBonus();
-            this->setVisible(false);
-            scene()->removeItem(this);
-            return;
-        }
-
+    if (this->sceneBoundingRect().left() <= paddleRight && this->sceneBoundingRect().right() >= paddleLeft
+            && newY + this->sceneBoundingRect().height() >= paddleTop) {
+        this->setVisible(false);
+        applyBonus();
+        scene()->removeItem(this);
     }
 
     setY(newY);

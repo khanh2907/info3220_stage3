@@ -43,6 +43,7 @@ public:
 
     int getPower();
     int setPower(int newPower);
+    void restoreDefaultRadius();
 
 protected:
     virtual void advance(int step);

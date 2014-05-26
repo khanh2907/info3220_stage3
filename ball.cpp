@@ -100,6 +100,10 @@ int Ball::setPower(int newPower) {
     return m_power;
 }
 
+void Ball::restoreDefaultRadius() {
+    this->setRadius(m_defaultRadius);
+}
+
 /*!
  * \brief Overloaded QGraphicsItem::boundingRect
  *
@@ -214,6 +218,7 @@ void Ball::advance(int step) {
                     coordinate.setY(300);
                     setXVelocity(0);
                     setYVelocity(0);
+                    tablescene->resetPowerUps();
                     tablescene->getPlayer()->setRoundStarted(false);
                 }
             }
@@ -285,10 +290,14 @@ void Ball::advance(int step) {
 
                 if (playGameOn) {
                     // reduce brick life by ball power
-                    int ballPower = this->getPower();
-                    thisBrick->decLife(ballPower);
+                    int currentLife = thisBrick->getNumLives();
+                    thisBrick->decLife(this->getPower());
+                    int newLife = thisBrick->getNumLives();
 
-                    qreal currentScore = tablescene->getPlayer()->increaseScore(ballPower);
+                    if (newLife < 0)
+                        newLife = 0;
+
+                    qreal currentScore = tablescene->getPlayer()->increaseScore(currentLife-newLife);
                     std::stringstream ss;
                     ss << "Score: " << currentScore;
                     tablescene->updateOverlay(2, QString::fromStdString(ss.str()));

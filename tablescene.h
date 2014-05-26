@@ -45,6 +45,8 @@ public:
 
     void generateLevel();
     void restartGame();
+    void addPowerup(qreal x, qreal y);
+    void resetPowerUps();
 
     virtual ~TableScene();
 
