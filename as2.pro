@@ -22,7 +22,9 @@ SOURCES += main.cpp\
     paddle.cpp \
     player.cpp \
     overlayobject.cpp \
-    levelgenerator.cpp
+    levelgenerator.cpp \
+    powerup.cpp \
+    extralife.cpp
 
 HEADERS  += \
     coordinate.h \
@@ -35,7 +37,9 @@ HEADERS  += \
     paddle.h \
     player.h \
     overlayobject.h \
-    levelgenerator.h
+    levelgenerator.h \
+    powerup.h \
+    extralife.h
 
 OTHER_FILES += \
     config.txt

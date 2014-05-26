@@ -37,6 +37,7 @@ public:
 
     TableScene & addOverlayObject(OverlayObject *overlay);
     std::vector<OverlayObject *> & getOverlayObjects();
+    void updateOverlay(int index, QString);
 
     bool getPlayGame();
     void setPlayer(Player * player);

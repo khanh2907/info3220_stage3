@@ -22,6 +22,11 @@ bool Player::getRoundStarted() {
     return m_roundStarted;
 }
 
+int Player::incrementLife() {
+    m_lives += 1;
+    return m_lives;
+}
+
 int Player::decrementLife() {
     m_lives -= 1;
     return m_lives;

@@ -11,6 +11,7 @@ public:
     int getCurrentLevel();
     bool getRoundStarted();
 
+    int incrementLife();
     int decrementLife();
     int increaseScore(int val);
     int increaseCurrentLevel();

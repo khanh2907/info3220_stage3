@@ -54,6 +54,7 @@ private:
 
     QPen m_linePen;
     QBrush m_fillBrush;
+    int m_power;
     using as1Ball::m_coordinate;
     using as1Ball::m_radius;
     using as1Ball::m_xVelocity;

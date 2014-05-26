@@ -21,7 +21,8 @@ Ball::Ball(QPointF coordinate,
            QColor color) :
     as1Ball(Coordinate(coordinate), radius, 0, xVelocity, yVelocity, color),
     m_linePen(QPen(Qt::black)),
-    m_fillBrush(QBrush(color))
+    m_fillBrush(QBrush(color)),
+    m_power(1)
 {
     // Sets the position of the Ball in the parent scene
     setPos(this->coordinate());
@@ -174,10 +175,7 @@ void Ball::advance(int step) {
                 std::stringstream ss;
                 ss << "Lives: " << current_life;
 
-                OverlayObject * livesOverlay = tablescene->getOverlayObjects().at(0);
-
-                livesOverlay->setText(QString::fromStdString(ss.str()));
-                livesOverlay->update();
+                tablescene->updateOverlay(0, QString::fromStdString(ss.str()));
 
                 if (current_life <= 0) {
                     QApplication::setOverrideCursor(Qt::ArrowCursor);
@@ -189,7 +187,6 @@ void Ball::advance(int step) {
                     msgBox.setText("GGWP!");
                     msgBox.setInformativeText(QString::fromStdString(scoreSS.str()));
                     msgBox.addButton("Play Again", QMessageBox::YesRole);
-                    msgBox.addButton("Submit Score", QMessageBox::ApplyRole);
                     msgBox.addButton("Exit", QMessageBox::NoRole);
                     msgBox.exec();
 
@@ -198,10 +195,6 @@ void Ball::advance(int step) {
                         //decrement life - TODO create player object
                         tablescene->getPlayer()->setRoundStarted(false);
                         tablescene->restartGame();
-                    }
-                    else if (msgBox.buttonRole(msgBox.clickedButton()) == QMessageBox::ApplyRole) {
-                        // TODO;
-                        QCoreApplication::instance()->exit();
                     }
                     else if (msgBox.buttonRole(msgBox.clickedButton()) == QMessageBox::NoRole) {
                         QCoreApplication::instance()->exit();
@@ -284,12 +277,9 @@ void Ball::advance(int step) {
                 thisBrick->decLife();
                 if (playGameOn) {
                     qreal currentScore = tablescene->getPlayer()->increaseScore(1);
-
                     std::stringstream ss;
                     ss << "Score: " << currentScore;
-                    OverlayObject * scoreOverlay = tablescene->getOverlayObjects().at(2);
-                    scoreOverlay->setText(QString::fromStdString(ss.str()));
-                    scoreOverlay->update();
+                    tablescene->updateOverlay(2, QString::fromStdString(ss.str()));
                 }
 
             }

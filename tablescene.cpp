@@ -263,6 +263,13 @@ std::vector<OverlayObject *> & TableScene::getOverlayObjects() {
     return m_overlays;
 }
 
+void TableScene::updateOverlay(int index, QString text) {
+    OverlayObject * livesOverlay = m_overlays.at(index);
+
+    livesOverlay->setText(text);
+    livesOverlay->update();
+}
+
 TableScene & TableScene::addPaddle(Paddle *paddle){
     m_paddle = paddle;
     this->addItem(paddle);
