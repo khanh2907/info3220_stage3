@@ -20,6 +20,7 @@ Ball::Ball(QPointF coordinate,
            double yVelocity,
            QColor color) :
     as1Ball(Coordinate(coordinate), radius, 0, xVelocity, yVelocity, color),
+    m_defaultRadius(radius),
     m_linePen(QPen(Qt::black)),
     m_fillBrush(QBrush(color)),
     m_power(1)

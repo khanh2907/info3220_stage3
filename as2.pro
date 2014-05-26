@@ -25,7 +25,8 @@ SOURCES += main.cpp\
     levelgenerator.cpp \
     powerup.cpp \
     extralife.cpp \
-    ballpowerbonus.cpp
+    ballpowerbonus.cpp \
+    ballsizebonus.cpp
 
 HEADERS  += \
     coordinate.h \
@@ -41,7 +42,8 @@ HEADERS  += \
     levelgenerator.h \
     powerup.h \
     extralife.h \
-    ballpowerbonus.h
+    ballpowerbonus.h \
+    ballsizebonus.h
 
 OTHER_FILES += \
     config.txt
