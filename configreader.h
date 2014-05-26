@@ -63,6 +63,7 @@ public:
     static int getRegeneratedBrickMaxLives();
     static bool getShowBrickLives();
     static bool getPlayGame();
+    static bool getLevelsOn();
 
 protected:
     ConfigReader(std::string file);
@@ -94,6 +95,7 @@ private:
     static bool showBrickLives;
 
     static bool playGame;
+    static bool levelsOn;
 
 };
 #endif // CONFIGREADER_H

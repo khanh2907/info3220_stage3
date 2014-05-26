@@ -63,16 +63,8 @@ int main(int argc, char *argv[])
                                       the_reader->getBallYSpeed(),
                                       the_reader->getBallColor()));
 
-            // Add bricks
-            foreach (ConfigReader::brickConfig brick, the_reader->getBricks()) {
-                table->addBrick(new Brick( QRectF(brick.x, brick.y, brick.width, brick.height),
-                                           brick.lives,
-                                           brick.visible,
-                                           QBrush(brick.color)));
-            }
+
         }
-
-
 
 
         if (the_reader->getPlayGame()) {
@@ -99,7 +91,20 @@ int main(int argc, char *argv[])
                                       0,
                                       the_reader->getBallColor()));
 
+
+        }
+
+        // Add bricks
+        if (the_reader->getLevelsOn()) {
             table->generateLevel();
+        }
+        else {
+            foreach (ConfigReader::brickConfig brick, the_reader->getBricks()) {
+                table->addBrick(new Brick( QRectF(brick.x, brick.y, brick.width, brick.height),
+                                           brick.lives,
+                                           brick.visible,
+                                           QBrush(brick.color)));
+            }
         }
 
         table->startAnimation(the_reader->getFramerate());
