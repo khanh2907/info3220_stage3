@@ -91,4 +91,4 @@ showBrickLives:1
 
 # Turn on the GAME
 playGame: 1
-levelsOn: 0
+levelsOn: 1

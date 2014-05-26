@@ -24,6 +24,7 @@
 #include "levelgenerator.h"
 #include "powerup.h"
 #include "extralife.h"
+#include "ballpowerbonus.h"
 
 int main(int argc, char *argv[])
 {
@@ -76,7 +77,8 @@ int main(int argc, char *argv[])
             table->addOverlayObject(new OverlayObject(QRectF(380, 0, 100, 20), true, "level","Level: 1"));
             table->addOverlayObject(new OverlayObject(QRectF(480, 0, 100, 20), true, "score","Score: 0"));
 
-            table->addItem(new ExtraLife(QRectF(0, 0, 40, 15), "P", 2));
+            table->addItem(new ExtraLife(QRectF(0, 0, 40, 15), "L", 2));
+            table->addItem(new BallPowerBonus(QRectF(500, 0, 40, 15), "P", 2));
 
             // Add paddle
             Paddle * paddle = new Paddle (QRectF(0, 550, 100, 10));

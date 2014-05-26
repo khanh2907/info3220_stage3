@@ -115,6 +115,12 @@ Brick & Brick::decLife() {
     return *this;
 }
 
+Brick & Brick::decLife(int damage) {
+    m_lives -= damage;
+    this->update();
+    return *this;
+}
+
 //! Setter for fill brush
 Brick & Brick::setFillBrush(const QBrush &fillBrush) {
     m_fillBrush = fillBrush;

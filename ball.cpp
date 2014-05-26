@@ -90,6 +90,14 @@ bool Ball::isLeftCollision() const {
     return mapToParent(this->boundingRect().left(), 0).x() < 0;
 }
 
+int Ball::getPower() {
+    return m_power;
+}
+
+int Ball::setPower(int newPower) {
+    m_power = newPower;
+    return m_power;
+}
 
 /*!
  * \brief Overloaded QGraphicsItem::boundingRect
@@ -273,13 +281,20 @@ void Ball::advance(int step) {
                    coordinate.setY(brickBottom);
                 }
 
-                // reduce brick life by one
-                thisBrick->decLife();
+
                 if (playGameOn) {
-                    qreal currentScore = tablescene->getPlayer()->increaseScore(1);
+                    // reduce brick life by ball power
+                    int ballPower = this->getPower();
+                    thisBrick->decLife(ballPower);
+
+                    qreal currentScore = tablescene->getPlayer()->increaseScore(ballPower);
                     std::stringstream ss;
                     ss << "Score: " << currentScore;
                     tablescene->updateOverlay(2, QString::fromStdString(ss.str()));
+                }
+                else {
+                    // reduce brick life by one
+                    thisBrick->decLife();
                 }
 
             }

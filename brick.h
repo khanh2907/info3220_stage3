@@ -18,6 +18,7 @@ public:
     Brick & setNumLives(int lives);
     int getNumLives();
     Brick & decLife();
+    Brick & decLife(int damage);
 
     Brick & setLinePen(const QPen &linePen);
     Brick & setFillBrush(const QBrush &fillBrush);

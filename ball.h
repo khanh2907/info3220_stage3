@@ -41,6 +41,9 @@ public:
     using as1Ball::yVelocity;
     using as1Ball::setYVelocity;
 
+    int getPower();
+    int setPower(int newPower);
+
 protected:
     virtual void advance(int step);
 

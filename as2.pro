@@ -24,7 +24,8 @@ SOURCES += main.cpp\
     overlayobject.cpp \
     levelgenerator.cpp \
     powerup.cpp \
-    extralife.cpp
+    extralife.cpp \
+    ballpowerbonus.cpp
 
 HEADERS  += \
     coordinate.h \
@@ -39,7 +40,8 @@ HEADERS  += \
     overlayobject.h \
     levelgenerator.h \
     powerup.h \
-    extralife.h
+    extralife.h \
+    ballpowerbonus.h
 
 OTHER_FILES += \
     config.txt
