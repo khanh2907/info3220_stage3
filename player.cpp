@@ -1,9 +1,11 @@
 #include "player.h"
 
-Player::Player(int lives) : m_lives(lives),
+Player::Player(int lives, bool levelGen, bool powerUps) : m_lives(lives),
     m_score(0),
     m_currentLevel(1),
-    m_roundStarted(false)
+    m_roundStarted(false),
+    m_levelGen(levelGen),
+    m_powerUps(powerUps)
 {}
 
 int Player::getLives() {
@@ -44,6 +46,14 @@ int Player::increaseCurrentLevel() {
 
 bool Player::setRoundStarted(bool val) {
     m_roundStarted = val;
+}
+
+bool Player::getLevelGen() {
+    return m_levelGen;
+}
+
+bool Player::getPowerUps() {
+    return m_powerUps;
 }
 
 void Player::resetStats() {

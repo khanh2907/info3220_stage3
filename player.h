@@ -4,7 +4,7 @@
 class Player
 {
 public:
-    Player(int lives);
+    Player(int lives, bool levelGen, bool powerUps);
 
     int getLives();
     int getScore();
@@ -17,6 +17,9 @@ public:
     int increaseCurrentLevel();
     bool setRoundStarted(bool val);
 
+    bool getLevelGen();
+    bool getPowerUps();
+
     void resetStats();
 
 private:
@@ -24,6 +27,8 @@ private:
     int m_score;
     int m_currentLevel;
     bool m_roundStarted;
+    bool m_levelGen;
+    bool m_powerUps;
 };
 
 #endif // PLAYER_H

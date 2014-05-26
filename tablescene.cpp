@@ -237,7 +237,7 @@ TableScene & TableScene::removeBrick(Brick *brick) {
 
     delete brick;
 
-    if (m_bricks.size() == 0) {
+    if (m_bricks.size() == 0 && m_player->getLevelGen()) {
         // level completed
 
         m_ball->setXVelocity(0);

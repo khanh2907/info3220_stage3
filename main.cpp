@@ -68,7 +68,7 @@ int main(int argc, char *argv[])
 
 
         if (the_reader->getPlayGame()) {
-            table->setPlayer(new Player(3));
+            table->setPlayer(new Player(the_reader->getIntialLives(), the_reader->getLevelsOn(), the_reader->getPowerUpsOn()));
 
             table->addOverlayObject(new OverlayObject(QRectF(280, 0, 100, 20), true, "lives","Lives: 3"));
             table->addOverlayObject(new OverlayObject(QRectF(380, 0, 100, 20), true, "level","Level: 1"));

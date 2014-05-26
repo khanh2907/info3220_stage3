@@ -64,6 +64,8 @@ public:
     static bool getShowBrickLives();
     static bool getPlayGame();
     static bool getLevelsOn();
+    static bool getPowerUpsOn();
+    static int getIntialLives();
 
 protected:
     ConfigReader(std::string file);
@@ -95,7 +97,9 @@ private:
     static bool showBrickLives;
 
     static bool playGame;
+    static int initialLives;
     static bool levelsOn;
+    static bool powerUpsOn;
 
 };
 #endif // CONFIGREADER_H

@@ -25,7 +25,9 @@ double ConfigReader::regeneratedBrickProbability = 0;
 int ConfigReader::regeneratedBrickMaxLives = 0;
 bool ConfigReader::showBrickLives = false;
 bool ConfigReader::playGame = false;
+int ConfigReader::initialLives = 3;
 bool ConfigReader::levelsOn = false;
+bool ConfigReader::powerUpsOn = false;
 
 ConfigReader *ConfigReader::instance(string file)
 {
@@ -100,8 +102,11 @@ ConfigReader::ConfigReader(string file)
                 else if (!paramName.compare(std::string("regeneratedBrickProbability"))) ss>>regeneratedBrickProbability;
                 else if (!paramName.compare(std::string("regeneratedBrickMaxLives"))) ss>>regeneratedBrickMaxLives;
                 else if (!paramName.compare(std::string("showBrickLives"))) ss>>showBrickLives;
+
                 else if (!paramName.compare(std::string("playGame"))) ss>>playGame;
+                else if (!paramName.compare(std::string("initialLives"))) ss>>initialLives;
                 else if (!paramName.compare(std::string("levelsOn"))) ss>>levelsOn;
+                else if (!paramName.compare(std::string("powerUpsOn"))) ss>>powerUpsOn;
 
 
                 else errorType=ERROR_UNKNOWN_PARAM;
@@ -295,9 +300,19 @@ bool ConfigReader::getPlayGame() {
     return playGame;
 }
 
-//! getter for geteLevelsOn
+//! getter for getLevelsOn
 bool ConfigReader::getLevelsOn() {
     return levelsOn;
+}
+
+//! getter for getPowerUpsOn
+bool ConfigReader::getPowerUpsOn() {
+    return powerUpsOn;
+}
+
+//! getter for getInitialLives
+int ConfigReader::getIntialLives() {
+    return initialLives;
 }
 
 /*!

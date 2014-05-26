@@ -54,9 +54,11 @@ void Brick::advance(int step) {
     if (m_lives <= 0) {
         this->setVisible(false);
 
-        qreal x = this->boundingRect().left();
-        qreal y = this->boundingRect().top();
-        tableScene->addPowerup(x, y);
+        if (tableScene->getPlayer()->getPowerUps()) {
+            qreal x = this->boundingRect().left();
+            qreal y = this->boundingRect().top();
+            tableScene->addPowerup(x, y);
+        }
 
         tableScene->removeBrick(this);
 
