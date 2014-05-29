@@ -2,7 +2,10 @@
 #include <QGraphicsScene>
 #include "tablescene.h"
 #include "paddle.h"
-
+/*!
+ * \brief Constructor of the PowerUp class
+ * \return void
+ */
 PowerUp::PowerUp(const QRectF &rect, QString title, qreal dropVelocity, const QBrush &fill_brush) :
     QGraphicsRectItem(rect),
     m_title(title),

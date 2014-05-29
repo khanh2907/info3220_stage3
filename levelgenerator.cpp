@@ -1,10 +1,20 @@
 #include "levelgenerator.h"
 #include <time.h>
+
+/*!
+ * \brief Constructor for the LevelGenerator class
+ * \return LevelGenerator
+ */
 LevelGenerator::LevelGenerator(int width, int height) :
     m_sceneWidth(width), m_sceneHeight(height)
 {
 }
 
+/*!
+ * \brief Generates a new level of bricks based on the current level given.
+ * \param int current level
+ * \return vector<Brick *> which is a list of bricks
+ */
 std::vector<Brick *> LevelGenerator::generate(int level) {
     std::vector<Brick *> bricks;
 

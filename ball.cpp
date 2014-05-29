@@ -39,6 +39,13 @@ QPointF Ball::coordinate() const
     return QPointF(m_coordinate.getQtRenderingXCoordinate(), m_coordinate.getQtRenderingYCoordinate());
 }
 
+/*!
+ * \brief Sets coordinate of the ball
+ *
+ * Takes in QPointF which is a coordinate, and sets it to the Ball object
+ *
+ * \param QPointF coordinate which is the coordinate that the ball will be set to
+ */
 void Ball::setCoordinate(const QPointF &coordinate)
 {
     m_coordinate.setXCoordinate(coordinate.x());
@@ -91,15 +98,28 @@ bool Ball::isLeftCollision() const {
     return mapToParent(this->boundingRect().left(), 0).x() < 0;
 }
 
+/*!
+ * \brief Returns the power of the ball
+ * \return int
+ */
 int Ball::getPower() {
     return m_power;
 }
 
+/*!
+ * \brief Sets the power of the ball
+ * \param int value of new power value
+ * \return int value of the new power
+ */
 int Ball::setPower(int newPower) {
     m_power = newPower;
     return m_power;
 }
 
+/*!
+ * \brief Sets the radius to the default radius set at initialisation
+ * \return void
+ */
 void Ball::restoreDefaultRadius() {
     this->setRadius(m_defaultRadius);
 }

@@ -87,6 +87,11 @@ void TableScene::keyPressEvent (QKeyEvent *e) {
     }
 }
 
+/*!
+ * \brief Handles mouse movement events. This method controls the paddle's movement.
+ *
+ * \return void
+ */
 void TableScene::mouseMoveEvent(QGraphicsSceneMouseEvent *e){
     if (m_playGame){
         // move the paddle
@@ -108,6 +113,11 @@ void TableScene::mouseMoveEvent(QGraphicsSceneMouseEvent *e){
     }
 }
 
+/*!
+ * \brief Handles mouse press events. This method controls the launching of the ball.
+ *
+ * \return void
+ */
 void TableScene::mousePressEvent(QGraphicsSceneMouseEvent *e) {
     if (m_playGame) {
         if (!m_player->getRoundStarted()) {
@@ -225,6 +235,15 @@ std::vector<Brick *> & TableScene::getBricks()  {
     return m_bricks;
 }
 
+/*!
+ * \brief Removes the brick from the scene.
+ *
+ * Removes the brick from the scene and if it was the last brick and the game is on,
+ * generate the next level.
+ *
+ * \param brick which is the brick to be deleted.
+ * \return Updated TableScene
+ */
 TableScene & TableScene::removeBrick(Brick *brick) {
 
     this->removeItem(brick);
@@ -257,6 +276,7 @@ TableScene & TableScene::removeBrick(Brick *brick) {
     return *this;
 }
 
+//! adder for OverlayObjects
 TableScene & TableScene::addOverlayObject(OverlayObject *overlay) {
     m_overlays.push_back(overlay);
     this->addItem(overlay);
@@ -264,10 +284,12 @@ TableScene & TableScene::addOverlayObject(OverlayObject *overlay) {
     return *this;
 }
 
+//! getter for OverlayObjects
 std::vector<OverlayObject *> & TableScene::getOverlayObjects() {
     return m_overlays;
 }
 
+//! mutator for overlays
 void TableScene::updateOverlay(int index, QString text) {
     OverlayObject * livesOverlay = m_overlays.at(index);
 
@@ -275,6 +297,7 @@ void TableScene::updateOverlay(int index, QString text) {
     livesOverlay->update();
 }
 
+//! Adder for Paddle objects
 TableScene & TableScene::addPaddle(Paddle *paddle){
     m_paddle = paddle;
     this->addItem(paddle);
@@ -287,18 +310,24 @@ Paddle * TableScene::getPaddle() {
     return m_paddle;
 }
 
+//! Getter for the playGame bool
 bool TableScene::getPlayGame() {
     return m_playGame;
 }
 
+//! Setter for player member variable
 void TableScene::setPlayer(Player *player) {
     m_player = player;
 }
 
+//! Getter for the player
 Player * TableScene::getPlayer() {
     return m_player;
 }
 
+/*!
+ * \brief Generate next level using the LevelGenerator
+ */
 void TableScene::generateLevel() {
     LevelGenerator lvlGen(this->width(), this->height());
 
@@ -310,6 +339,14 @@ void TableScene::generateLevel() {
 
 }
 
+/*!
+ * \brief Restarts the game.
+ *
+ * This is called when the player wants to play again.
+ * All the player stats are reset to initial values and the game will start from the begin.
+ * Bricks will be cleared and a new level will be generated.
+ *
+ */
 void TableScene::restartGame() {
 
     m_player->resetStats();
@@ -340,6 +377,9 @@ void TableScene::restartGame() {
     m_player->setRoundStarted(false);
 }
 
+/*!
+ * \brief Chance for a PowerUp to drop after a brick has died.
+ */
 void TableScene::addPowerup(qreal x, qreal y) {
     if (rand()%6 == 0) {
         int randBonus = rand()%3;
@@ -357,6 +397,9 @@ void TableScene::addPowerup(qreal x, qreal y) {
     }
 }
 
+/*!
+ * \brief Resets PowerUp bonuses.
+ */
 void TableScene::resetPowerUps() {
     m_ball->restoreDefaultRadius();
     m_ball->setPower(1);

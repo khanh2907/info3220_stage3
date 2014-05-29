@@ -92,5 +92,5 @@ showBrickLives:1
 # Turn on the GAME
 playGame: 1
 initialLives: 3
-levelsOn: 0
-powerUpsOn: 0
+levelsOn: 1
+powerUpsOn: 1

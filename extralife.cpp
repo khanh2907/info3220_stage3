@@ -4,6 +4,10 @@
 #include <QGraphicsScene>
 #include <sstream>
 
+/*!
+ * \brief Pure virtual class of the strategy design pattern.
+ * \return void
+ */
 void ExtraLife::applyBonus() {
     TableScene * tableScene = dynamic_cast<TableScene *>(scene());
 

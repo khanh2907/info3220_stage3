@@ -54,13 +54,19 @@ void Brick::advance(int step) {
     if (m_lives <= 0) {
         this->setVisible(false);
 
-        if (tableScene->getPlayer()->getPowerUps()) {
-            qreal x = this->boundingRect().left();
-            qreal y = this->boundingRect().top();
-            tableScene->addPowerup(x, y);
-        }
+        if(tableScene->getPlayGame()) {
 
-        tableScene->removeBrick(this);
+            if (tableScene->getPlayer()->getPowerUps()) {
+                qreal x = this->boundingRect().left();
+                qreal y = this->boundingRect().top();
+                tableScene->addPowerup(x, y);
+            }
+
+            tableScene->removeBrick(this);
+        }
+        else {
+            scene()->removeItem(this);
+        }
 
 
 
@@ -126,6 +132,7 @@ Brick & Brick::decLife() {
     return *this;
 }
 
+//! Decrementor for lives
 Brick & Brick::decLife(int damage) {
     m_lives -= damage;
     this->update();

@@ -27,7 +27,7 @@ void Paddle::advance(int step) {
 }
 
 /*!
- * \brief Paints the brick object
+ * \brief Paints the paddle object
  *
  * Performs the painting of the brick in the parent Table object using the given painter.
  *
