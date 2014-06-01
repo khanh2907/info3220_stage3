@@ -1,0 +1,112 @@
+\hypertarget{class_brick}{\section{Brick Class Reference}
+\label{class_brick}\index{Brick@{Brick}}
+}
+Inheritance diagram for Brick\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_brick}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{class_brick_a519f7d73685717c8e67532baf4542403}{\hyperlink{class_brick_a519f7d73685717c8e67532baf4542403}{Brick} (const Q\+Rect\+F \&rect, int lives, bool visible, const Q\+Brush \&fill\+\_\+brush=Q\+Brush())}\label{class_brick_a519f7d73685717c8e67532baf4542403}
+
+\begin{DoxyCompactList}\small\item\em \hyperlink{class_brick}{Brick} constructor. \end{DoxyCompactList}\item 
+\hyperlink{class_brick_a05b0f571f9d01b963cdf263b2a6c5ce8}{Brick} (const \hyperlink{class_brick}{Brick} \&other)
+\begin{DoxyCompactList}\small\item\em \hyperlink{class_brick}{Brick} copy constructor. \end{DoxyCompactList}\item 
+\hypertarget{class_brick_adeb99ee821f196f4cb508bf90ef09667}{\hyperlink{class_brick}{Brick} \& \hyperlink{class_brick_adeb99ee821f196f4cb508bf90ef09667}{set\+Num\+Lives} (int lives)}\label{class_brick_adeb99ee821f196f4cb508bf90ef09667}
+
+\begin{DoxyCompactList}\small\item\em Setter for lives. \end{DoxyCompactList}\item 
+\hypertarget{class_brick_ae9beaab99c939433bc14e32eebb84fa1}{int \hyperlink{class_brick_ae9beaab99c939433bc14e32eebb84fa1}{get\+Num\+Lives} ()}\label{class_brick_ae9beaab99c939433bc14e32eebb84fa1}
+
+\begin{DoxyCompactList}\small\item\em Getter for lives. \end{DoxyCompactList}\item 
+\hypertarget{class_brick_a88e3b8230a772d5779b411b1075abe43}{\hyperlink{class_brick}{Brick} \& \hyperlink{class_brick_a88e3b8230a772d5779b411b1075abe43}{dec\+Life} ()}\label{class_brick_a88e3b8230a772d5779b411b1075abe43}
+
+\begin{DoxyCompactList}\small\item\em Decrementor for lives. \end{DoxyCompactList}\item 
+\hypertarget{class_brick_a5b0ac3364dfe960b9fe6226e0c1c38e1}{\hyperlink{class_brick}{Brick} \& \hyperlink{class_brick_a5b0ac3364dfe960b9fe6226e0c1c38e1}{dec\+Life} (int damage)}\label{class_brick_a5b0ac3364dfe960b9fe6226e0c1c38e1}
+
+\begin{DoxyCompactList}\small\item\em Decrementor for lives. \end{DoxyCompactList}\item 
+\hypertarget{class_brick_a920c42dfd38aa55a1b36b5dd99317c82}{\hyperlink{class_brick}{Brick} \& {\bfseries set\+Line\+Pen} (const Q\+Pen \&line\+Pen)}\label{class_brick_a920c42dfd38aa55a1b36b5dd99317c82}
+
+\item 
+\hypertarget{class_brick_a33f690e98c9b6d1df39a59204faa9f34}{\hyperlink{class_brick}{Brick} \& \hyperlink{class_brick_a33f690e98c9b6d1df39a59204faa9f34}{set\+Fill\+Brush} (const Q\+Brush \&fill\+Brush)}\label{class_brick_a33f690e98c9b6d1df39a59204faa9f34}
+
+\begin{DoxyCompactList}\small\item\em Setter for fill brush. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+virtual void \hyperlink{class_brick_afccd94a8ea86caea8713414ac83f6220}{advance} (int step)
+\begin{DoxyCompactList}\small\item\em Sets the state of the brick as the frame of the scene is advancing. \end{DoxyCompactList}\item 
+virtual void \hyperlink{class_brick_a4caf1a79fce7a93411b887304dcdbd64}{paint} (Q\+Painter $\ast$painter, const Q\+Style\+Option\+Graphics\+Item $\ast$option, Q\+Widget $\ast$widget)
+\begin{DoxyCompactList}\small\item\em Paints the brick object. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{class_brick_a05b0f571f9d01b963cdf263b2a6c5ce8}{\index{Brick@{Brick}!Brick@{Brick}}
+\index{Brick@{Brick}!Brick@{Brick}}
+\subsubsection[{Brick}]{\setlength{\rightskip}{0pt plus 5cm}Brick\+::\+Brick (
+\begin{DoxyParamCaption}
+\item[{const {\bf Brick} \&}]{other}
+\end{DoxyParamCaption}
+)}}\label{class_brick_a05b0f571f9d01b963cdf263b2a6c5ce8}
+
+
+\hyperlink{class_brick}{Brick} copy constructor. 
+
+Explict copy constructor as base class 'Q\+Graphics\+Item' has private copy constructor
+
+
+\begin{DoxyParams}{Parameters}
+{\em other} & The object to copy to \\
+\hline
+\end{DoxyParams}
+
+
+\subsection{Member Function Documentation}
+\hypertarget{class_brick_afccd94a8ea86caea8713414ac83f6220}{\index{Brick@{Brick}!advance@{advance}}
+\index{advance@{advance}!Brick@{Brick}}
+\subsubsection[{advance}]{\setlength{\rightskip}{0pt plus 5cm}void Brick\+::advance (
+\begin{DoxyParamCaption}
+\item[{int}]{step}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [virtual]}}}\label{class_brick_afccd94a8ea86caea8713414ac83f6220}
+
+
+Sets the state of the brick as the frame of the scene is advancing. 
+
+Called by the advance method of the parent Table.
+
+This method is called twice. The first time with step == 0 to indicate the scene is about to advance, and a second time with step == 1 to indicate the scene is advancing.
+
+
+\begin{DoxyParams}{Parameters}
+{\em step} & \\
+\hline
+\end{DoxyParams}
+\hypertarget{class_brick_a4caf1a79fce7a93411b887304dcdbd64}{\index{Brick@{Brick}!paint@{paint}}
+\index{paint@{paint}!Brick@{Brick}}
+\subsubsection[{paint}]{\setlength{\rightskip}{0pt plus 5cm}void Brick\+::paint (
+\begin{DoxyParamCaption}
+\item[{Q\+Painter $\ast$}]{painter, }
+\item[{const Q\+Style\+Option\+Graphics\+Item $\ast$}]{option, }
+\item[{Q\+Widget $\ast$}]{widget}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [virtual]}}}\label{class_brick_a4caf1a79fce7a93411b887304dcdbd64}
+
+
+Paints the brick object. 
+
+Performs the painting of the brick in the parent Table object using the given painter.
+
+
+\begin{DoxyParams}{Parameters}
+{\em painter} & in which to perform painting \\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+/\+Users/khanh/\+I\+N\+F\+O3220\+\_\+\+Assignment/\+Assignment\+Three\+Base\+Two/brick.\+h\item 
+/\+Users/khanh/\+I\+N\+F\+O3220\+\_\+\+Assignment/\+Assignment\+Three\+Base\+Two/brick.\+cpp\end{DoxyCompactItemize}

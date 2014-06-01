@@ -1,0 +1,270 @@
+\hypertarget{class_ball}{\section{Ball Class Reference}
+\label{class_ball}\index{Ball@{Ball}}
+}
+Inheritance diagram for Ball\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_ball}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{class_ball_a5a588a1c1c218aa5f6d8578801da719a}{{\bfseries Ball} (Q\+Point\+F coordinate, unsigned int radius, double x\+Velocity, double y\+Velocity, Q\+Color color)}\label{class_ball_a5a588a1c1c218aa5f6d8578801da719a}
+
+\item 
+\hyperlink{class_ball_acff1695dfbb0dd58a5356efef558182d}{Ball} (const \hyperlink{class_ball}{Ball} \&other)
+\begin{DoxyCompactList}\small\item\em \hyperlink{class_ball}{Ball} copy constructor. \end{DoxyCompactList}\item 
+bool \hyperlink{class_ball_a2252d47f1db0da83386d82f7b5e59c0f}{is\+Bottom\+Collision} () const 
+\begin{DoxyCompactList}\small\item\em Detects whether the ball has hit the bottom of the scene. \end{DoxyCompactList}\item 
+bool \hyperlink{class_ball_ab40a04388b295fea9a2e6e682b99bfdc}{is\+Ceil\+Collision} () const 
+\begin{DoxyCompactList}\small\item\em Detects whether the ball has hit the top of the scene. \end{DoxyCompactList}\item 
+bool \hyperlink{class_ball_a6f691389189d6799de693fbfaf3324e4}{is\+Left\+Collision} () const 
+\begin{DoxyCompactList}\small\item\em Detects whether the ball has hit the left side of the scene. \end{DoxyCompactList}\item 
+bool \hyperlink{class_ball_a68aa186abe6ef475588bfed3f3eb83de}{is\+Right\+Collision} () const 
+\begin{DoxyCompactList}\small\item\em Detects whether the ball has hit the right side of the scene. \end{DoxyCompactList}\item 
+\hypertarget{class_ball_aaf64ce0df64b577edaaa677cd8b5b961}{Q\+Point\+F {\bfseries coordinate} () const }\label{class_ball_aaf64ce0df64b577edaaa677cd8b5b961}
+
+\item 
+void \hyperlink{class_ball_a69b5819e8b0b441f0412762ab2e0e3db}{set\+Coordinate} (const Q\+Point\+F \&coordinate)
+\begin{DoxyCompactList}\small\item\em Sets coordinate of the ball. \end{DoxyCompactList}\item 
+int \hyperlink{class_ball_a075ae9c0cb4d07a368aab11538196657}{get\+Power} ()
+\begin{DoxyCompactList}\small\item\em Returns the power of the ball. \end{DoxyCompactList}\item 
+int \hyperlink{class_ball_a7915b97921a5aeb5885988689de34306}{set\+Power} (int new\+Power)
+\begin{DoxyCompactList}\small\item\em Sets the power of the ball. \end{DoxyCompactList}\item 
+void \hyperlink{class_ball_a01c8296409b7ab1a4656bdaf69a8d792}{restore\+Default\+Radius} ()
+\begin{DoxyCompactList}\small\item\em Sets the radius to the default radius set at initialisation. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+virtual void \hyperlink{class_ball_a8eef85bb7dc74d73796c8255e296a758}{advance} (int step)
+\begin{DoxyCompactList}\small\item\em Sets the state of the ball as the frame of the scene is advancing. \end{DoxyCompactList}\item 
+virtual Q\+Rect\+F \hyperlink{class_ball_ae68484e656a6c7a195e41185c06e9e8f}{bounding\+Rect} () const 
+\begin{DoxyCompactList}\small\item\em Overloaded Q\+Graphics\+Item\+::bounding\+Rect. \end{DoxyCompactList}\item 
+virtual Q\+Painter\+Path \hyperlink{class_ball_abbfd8d6c4f25ee9236ccc49fc68e1efa}{shape} () const 
+\begin{DoxyCompactList}\small\item\em Overloaded Q\+Graphics\+Item\+::shape. \end{DoxyCompactList}\item 
+virtual void \hyperlink{class_ball_ac61500d8ef7bbb595175da04c323949c}{paint} (Q\+Painter $\ast$painter, const Q\+Style\+Option\+Graphics\+Item $\ast$option, Q\+Widget $\ast$widget)
+\begin{DoxyCompactList}\small\item\em Paints the ball object. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{class_ball_acff1695dfbb0dd58a5356efef558182d}{\index{Ball@{Ball}!Ball@{Ball}}
+\index{Ball@{Ball}!Ball@{Ball}}
+\subsubsection[{Ball}]{\setlength{\rightskip}{0pt plus 5cm}Ball\+::\+Ball (
+\begin{DoxyParamCaption}
+\item[{const {\bf Ball} \&}]{other}
+\end{DoxyParamCaption}
+)}}\label{class_ball_acff1695dfbb0dd58a5356efef558182d}
+
+
+\hyperlink{class_ball}{Ball} copy constructor. 
+
+Explict copy constructor as base class 'Q\+Graphics\+Item' has private copy constructor
+
+
+\begin{DoxyParams}{Parameters}
+{\em other} & The object to copy to \\
+\hline
+\end{DoxyParams}
+
+
+\subsection{Member Function Documentation}
+\hypertarget{class_ball_a8eef85bb7dc74d73796c8255e296a758}{\index{Ball@{Ball}!advance@{advance}}
+\index{advance@{advance}!Ball@{Ball}}
+\subsubsection[{advance}]{\setlength{\rightskip}{0pt plus 5cm}void Ball\+::advance (
+\begin{DoxyParamCaption}
+\item[{int}]{step}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [virtual]}}}\label{class_ball_a8eef85bb7dc74d73796c8255e296a758}
+
+
+Sets the state of the ball as the frame of the scene is advancing. 
+
+Called by the advance method of the parent Table.
+
+This method is called twice. The first time with step == 0 to indicate the scene is about to advance, and a second time with step == 1 to indicate the scene is advancing.
+
+
+\begin{DoxyParams}{Parameters}
+{\em step} & \\
+\hline
+\end{DoxyParams}
+\hypertarget{class_ball_ae68484e656a6c7a195e41185c06e9e8f}{\index{Ball@{Ball}!bounding\+Rect@{bounding\+Rect}}
+\index{bounding\+Rect@{bounding\+Rect}!Ball@{Ball}}
+\subsubsection[{bounding\+Rect}]{\setlength{\rightskip}{0pt plus 5cm}Q\+Rect\+F Ball\+::bounding\+Rect (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [virtual]}}}\label{class_ball_ae68484e656a6c7a195e41185c06e9e8f}
+
+
+Overloaded Q\+Graphics\+Item\+::bounding\+Rect. 
+
+Defines the approximate size of the object. This is used to determine whether the object requires redrawing in the scene.
+
+\begin{DoxyReturn}{Returns}
+Q\+Rect\+F defining the obejct in the local coordinate system 
+\end{DoxyReturn}
+\hypertarget{class_ball_a075ae9c0cb4d07a368aab11538196657}{\index{Ball@{Ball}!get\+Power@{get\+Power}}
+\index{get\+Power@{get\+Power}!Ball@{Ball}}
+\subsubsection[{get\+Power}]{\setlength{\rightskip}{0pt plus 5cm}int Ball\+::get\+Power (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{class_ball_a075ae9c0cb4d07a368aab11538196657}
+
+
+Returns the power of the ball. 
+
+\begin{DoxyReturn}{Returns}
+int 
+\end{DoxyReturn}
+\hypertarget{class_ball_a2252d47f1db0da83386d82f7b5e59c0f}{\index{Ball@{Ball}!is\+Bottom\+Collision@{is\+Bottom\+Collision}}
+\index{is\+Bottom\+Collision@{is\+Bottom\+Collision}!Ball@{Ball}}
+\subsubsection[{is\+Bottom\+Collision}]{\setlength{\rightskip}{0pt plus 5cm}bool Ball\+::is\+Bottom\+Collision (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const}}\label{class_ball_a2252d47f1db0da83386d82f7b5e59c0f}
+
+
+Detects whether the ball has hit the bottom of the scene. 
+
+\begin{DoxyReturn}{Returns}
+bool 
+\end{DoxyReturn}
+\hypertarget{class_ball_ab40a04388b295fea9a2e6e682b99bfdc}{\index{Ball@{Ball}!is\+Ceil\+Collision@{is\+Ceil\+Collision}}
+\index{is\+Ceil\+Collision@{is\+Ceil\+Collision}!Ball@{Ball}}
+\subsubsection[{is\+Ceil\+Collision}]{\setlength{\rightskip}{0pt plus 5cm}bool Ball\+::is\+Ceil\+Collision (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const}}\label{class_ball_ab40a04388b295fea9a2e6e682b99bfdc}
+
+
+Detects whether the ball has hit the top of the scene. 
+
+\begin{DoxyReturn}{Returns}
+bool 
+\end{DoxyReturn}
+\hypertarget{class_ball_a6f691389189d6799de693fbfaf3324e4}{\index{Ball@{Ball}!is\+Left\+Collision@{is\+Left\+Collision}}
+\index{is\+Left\+Collision@{is\+Left\+Collision}!Ball@{Ball}}
+\subsubsection[{is\+Left\+Collision}]{\setlength{\rightskip}{0pt plus 5cm}bool Ball\+::is\+Left\+Collision (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const}}\label{class_ball_a6f691389189d6799de693fbfaf3324e4}
+
+
+Detects whether the ball has hit the left side of the scene. 
+
+\begin{DoxyReturn}{Returns}
+bool 
+\end{DoxyReturn}
+\hypertarget{class_ball_a68aa186abe6ef475588bfed3f3eb83de}{\index{Ball@{Ball}!is\+Right\+Collision@{is\+Right\+Collision}}
+\index{is\+Right\+Collision@{is\+Right\+Collision}!Ball@{Ball}}
+\subsubsection[{is\+Right\+Collision}]{\setlength{\rightskip}{0pt plus 5cm}bool Ball\+::is\+Right\+Collision (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const}}\label{class_ball_a68aa186abe6ef475588bfed3f3eb83de}
+
+
+Detects whether the ball has hit the right side of the scene. 
+
+\begin{DoxyReturn}{Returns}
+bool 
+\end{DoxyReturn}
+\hypertarget{class_ball_ac61500d8ef7bbb595175da04c323949c}{\index{Ball@{Ball}!paint@{paint}}
+\index{paint@{paint}!Ball@{Ball}}
+\subsubsection[{paint}]{\setlength{\rightskip}{0pt plus 5cm}void Ball\+::paint (
+\begin{DoxyParamCaption}
+\item[{Q\+Painter $\ast$}]{painter, }
+\item[{const Q\+Style\+Option\+Graphics\+Item $\ast$}]{option, }
+\item[{Q\+Widget $\ast$}]{widget}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [virtual]}}}\label{class_ball_ac61500d8ef7bbb595175da04c323949c}
+
+
+Paints the ball object. 
+
+Performs the painting of the ball in the parent Table object using the given painter.
+
+
+\begin{DoxyParams}{Parameters}
+{\em painter} & in which to perform painting \\
+\hline
+\end{DoxyParams}
+\hypertarget{class_ball_a01c8296409b7ab1a4656bdaf69a8d792}{\index{Ball@{Ball}!restore\+Default\+Radius@{restore\+Default\+Radius}}
+\index{restore\+Default\+Radius@{restore\+Default\+Radius}!Ball@{Ball}}
+\subsubsection[{restore\+Default\+Radius}]{\setlength{\rightskip}{0pt plus 5cm}void Ball\+::restore\+Default\+Radius (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{class_ball_a01c8296409b7ab1a4656bdaf69a8d792}
+
+
+Sets the radius to the default radius set at initialisation. 
+
+\begin{DoxyReturn}{Returns}
+void 
+\end{DoxyReturn}
+\hypertarget{class_ball_a69b5819e8b0b441f0412762ab2e0e3db}{\index{Ball@{Ball}!set\+Coordinate@{set\+Coordinate}}
+\index{set\+Coordinate@{set\+Coordinate}!Ball@{Ball}}
+\subsubsection[{set\+Coordinate}]{\setlength{\rightskip}{0pt plus 5cm}void Ball\+::set\+Coordinate (
+\begin{DoxyParamCaption}
+\item[{const Q\+Point\+F \&}]{coordinate}
+\end{DoxyParamCaption}
+)}}\label{class_ball_a69b5819e8b0b441f0412762ab2e0e3db}
+
+
+Sets coordinate of the ball. 
+
+Takes in Q\+Point\+F which is a coordinate, and sets it to the \hyperlink{class_ball}{Ball} object
+
+
+\begin{DoxyParams}{Parameters}
+{\em Q\+Point\+F} & coordinate which is the coordinate that the ball will be set to \\
+\hline
+\end{DoxyParams}
+\hypertarget{class_ball_a7915b97921a5aeb5885988689de34306}{\index{Ball@{Ball}!set\+Power@{set\+Power}}
+\index{set\+Power@{set\+Power}!Ball@{Ball}}
+\subsubsection[{set\+Power}]{\setlength{\rightskip}{0pt plus 5cm}int Ball\+::set\+Power (
+\begin{DoxyParamCaption}
+\item[{int}]{new\+Power}
+\end{DoxyParamCaption}
+)}}\label{class_ball_a7915b97921a5aeb5885988689de34306}
+
+
+Sets the power of the ball. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em int} & value of new power value \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+int value of the new power 
+\end{DoxyReturn}
+\hypertarget{class_ball_abbfd8d6c4f25ee9236ccc49fc68e1efa}{\index{Ball@{Ball}!shape@{shape}}
+\index{shape@{shape}!Ball@{Ball}}
+\subsubsection[{shape}]{\setlength{\rightskip}{0pt plus 5cm}Q\+Painter\+Path Ball\+::shape (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [virtual]}}}\label{class_ball_abbfd8d6c4f25ee9236ccc49fc68e1efa}
+
+
+Overloaded Q\+Graphics\+Item\+::shape. 
+
+Defines the detailed size and shape of the object. This is used for collission detection.
+
+\begin{DoxyReturn}{Returns}
+Q\+Painter\+Path defining the shape in the local coordinate system 
+\end{DoxyReturn}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+/\+Users/khanh/\+I\+N\+F\+O3220\+\_\+\+Assignment/\+Assignment\+Three\+Base\+Two/ball.\+h\item 
+/\+Users/khanh/\+I\+N\+F\+O3220\+\_\+\+Assignment/\+Assignment\+Three\+Base\+Two/ball.\+cpp\end{DoxyCompactItemize}

@@ -1,0 +1,93 @@
+\hypertarget{class_power_up}{\section{Power\+Up Class Reference}
+\label{class_power_up}\index{Power\+Up@{Power\+Up}}
+}
+Inheritance diagram for Power\+Up\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=3.000000cm]{class_power_up}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{class_power_up_a0358fe89144d73b501e2720abf633481}{Power\+Up} (const Q\+Rect\+F \&rect, Q\+String m\+\_\+title, qreal drop\+Velocity, const Q\+Brush \&fill\+\_\+brush=Q\+Brush())
+\begin{DoxyCompactList}\small\item\em Constructor of the \hyperlink{class_power_up}{Power\+Up} class. \end{DoxyCompactList}\item 
+\hypertarget{class_power_up_aab9ea5afffada47bb0f20d8d69e41843}{virtual void {\bfseries apply\+Bonus} ()=0}\label{class_power_up_aab9ea5afffada47bb0f20d8d69e41843}
+
+\end{DoxyCompactItemize}
+\subsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+virtual void \hyperlink{class_power_up_af24a16c7eba69136b408540cb0866a9b}{advance} (int step)
+\begin{DoxyCompactList}\small\item\em Sets the state of the powerup as the frame of the scene is advancing. \end{DoxyCompactList}\item 
+virtual void \hyperlink{class_power_up_a12700945cf46c42f38a7e5f4f18a2595}{paint} (Q\+Painter $\ast$painter, const Q\+Style\+Option\+Graphics\+Item $\ast$option, Q\+Widget $\ast$widget)
+\begin{DoxyCompactList}\small\item\em Paints the powerup object. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{class_power_up_a0358fe89144d73b501e2720abf633481}{\index{Power\+Up@{Power\+Up}!Power\+Up@{Power\+Up}}
+\index{Power\+Up@{Power\+Up}!Power\+Up@{Power\+Up}}
+\subsubsection[{Power\+Up}]{\setlength{\rightskip}{0pt plus 5cm}Power\+Up\+::\+Power\+Up (
+\begin{DoxyParamCaption}
+\item[{const Q\+Rect\+F \&}]{rect, }
+\item[{Q\+String}]{title, }
+\item[{qreal}]{drop\+Velocity, }
+\item[{const Q\+Brush \&}]{fill\+\_\+brush = {\ttfamily QBrush()}}
+\end{DoxyParamCaption}
+)}}\label{class_power_up_a0358fe89144d73b501e2720abf633481}
+
+
+Constructor of the \hyperlink{class_power_up}{Power\+Up} class. 
+
+\begin{DoxyReturn}{Returns}
+void 
+\end{DoxyReturn}
+
+
+\subsection{Member Function Documentation}
+\hypertarget{class_power_up_af24a16c7eba69136b408540cb0866a9b}{\index{Power\+Up@{Power\+Up}!advance@{advance}}
+\index{advance@{advance}!Power\+Up@{Power\+Up}}
+\subsubsection[{advance}]{\setlength{\rightskip}{0pt plus 5cm}void Power\+Up\+::advance (
+\begin{DoxyParamCaption}
+\item[{int}]{step}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [virtual]}}}\label{class_power_up_af24a16c7eba69136b408540cb0866a9b}
+
+
+Sets the state of the powerup as the frame of the scene is advancing. 
+
+Called by the advance method of the parent Table.
+
+This method is called twice. The first time with step == 0 to indicate the scene is about to advance, and a second time with step == 1 to indicate the scene is advancing.
+
+
+\begin{DoxyParams}{Parameters}
+{\em step} & \\
+\hline
+\end{DoxyParams}
+\hypertarget{class_power_up_a12700945cf46c42f38a7e5f4f18a2595}{\index{Power\+Up@{Power\+Up}!paint@{paint}}
+\index{paint@{paint}!Power\+Up@{Power\+Up}}
+\subsubsection[{paint}]{\setlength{\rightskip}{0pt plus 5cm}void Power\+Up\+::paint (
+\begin{DoxyParamCaption}
+\item[{Q\+Painter $\ast$}]{painter, }
+\item[{const Q\+Style\+Option\+Graphics\+Item $\ast$}]{option, }
+\item[{Q\+Widget $\ast$}]{widget}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [virtual]}}}\label{class_power_up_a12700945cf46c42f38a7e5f4f18a2595}
+
+
+Paints the powerup object. 
+
+Performs the painting of the powerup in the parent Table object using the given painter.
+
+
+\begin{DoxyParams}{Parameters}
+{\em painter} & in which to perform painting \\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+/\+Users/khanh/\+I\+N\+F\+O3220\+\_\+\+Assignment/\+Assignment\+Three\+Base\+Two/powerup.\+h\item 
+/\+Users/khanh/\+I\+N\+F\+O3220\+\_\+\+Assignment/\+Assignment\+Three\+Base\+Two/powerup.\+cpp\end{DoxyCompactItemize}

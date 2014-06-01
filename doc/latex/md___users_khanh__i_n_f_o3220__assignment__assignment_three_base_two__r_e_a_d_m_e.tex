@@ -1,0 +1,38 @@
+In order to extend the code into Stage 2 I had to make some changes to the existing code.
+
+\subsection*{\hyperlink{class_ball}{Ball} }
+
+The original \hyperlink{class_ball}{Ball} class was renamed \hyperlink{classas1_ball}{as1\+Ball}. This was changed to allow the definition of a new \hyperlink{class_ball}{Ball} class which acts as an adapter to allows \hyperlink{classas1_ball}{as1\+Ball} to be used as a Q\+Graphics\+Item.
+
+\subsection*{\hyperlink{class_config_reader}{Config\+Reader} }
+
+The \hyperlink{class_config_reader}{Config\+Reader} class was extended to accomodate for additional variables in the configuration file.
+
+\subsection*{Dialog }
+
+The functionality of the original Dialog class has been replaced with \hyperlink{class_table_scene}{Table\+Scene} and \hyperlink{class_table_view}{Table\+View} classes which subclass Q\+Graphics\+Scene and Q\+Graphics\+View respectively.
+
+\subsection*{\hyperlink{class_coordinate}{Coordinate} }
+
+The coordinate class was modified to get the frame width and height from the configuration file rather than storing this within \hyperlink{class_coordinate}{Coordinate}. An additional constructor was also added for convenience.
+
+\section*{Design decisions }
+
+As mentioned above the \hyperlink{class_ball}{Ball} class acts as an adapter to allow \hyperlink{classas1_ball}{as1\+Ball} to be used as a Q\+Graphics\+Item. \hyperlink{class_ball}{Ball} inherits from both Q\+Graphics\+Item (publicly) and \hyperlink{classas1_ball}{as1\+Ball} (privately), making this a use of the Class Adapter design pattern.
+
+\section*{Extension }
+
+For the extension I implemented regenerating bricks. Any brick that has previously died can reappear randomly. Bricks that reappear are given a random number of lives, and are given a different colour.
+
+The extension is customisable in terms of\+:
+
+
+\begin{DoxyItemize}
+\item The maximum number of lives a regenerated brick can be given
+\item The probability (per frame) that a given dead brick can reappear
+\item The colour of the regenerated brick
+\end{DoxyItemize}
+
+While only previously defined bricks can reappear, bricks can be defined as initially invisible, and these bricks can 'regenerate'.
+
+I also added the number of lives that each brick has to the brick. This feature can be disabled in the config file. 
