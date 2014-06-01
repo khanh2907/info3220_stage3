@@ -66,6 +66,7 @@ public:
     static bool getLevelsOn();
     static bool getPowerUpsOn();
     static int getIntialLives();
+    static qreal getPaddleWidth();
 
 protected:
     ConfigReader(std::string file);
@@ -100,6 +101,7 @@ private:
     static int initialLives;
     static bool levelsOn;
     static bool powerUpsOn;
+    static qreal paddleWidth;
 
 };
 #endif // CONFIGREADER_H

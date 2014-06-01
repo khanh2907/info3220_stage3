@@ -28,6 +28,7 @@ bool ConfigReader::playGame = false;
 int ConfigReader::initialLives = 3;
 bool ConfigReader::levelsOn = false;
 bool ConfigReader::powerUpsOn = false;
+qreal ConfigReader::paddleWidth = 100;
 
 ConfigReader *ConfigReader::instance(string file)
 {
@@ -107,6 +108,7 @@ ConfigReader::ConfigReader(string file)
                 else if (!paramName.compare(std::string("initialLives"))) ss>>initialLives;
                 else if (!paramName.compare(std::string("levelsOn"))) ss>>levelsOn;
                 else if (!paramName.compare(std::string("powerUpsOn"))) ss>>powerUpsOn;
+                else if (!paramName.compare(std::string("paddleWidth"))) ss>>paddleWidth;
 
 
                 else errorType=ERROR_UNKNOWN_PARAM;
@@ -313,6 +315,11 @@ bool ConfigReader::getPowerUpsOn() {
 //! getter for getInitialLives
 int ConfigReader::getIntialLives() {
     return initialLives;
+}
+
+//! getter for getInitialLives
+qreal ConfigReader::getPaddleWidth() {
+    return paddleWidth;
 }
 
 /*!

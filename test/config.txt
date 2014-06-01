@@ -1,5 +1,5 @@
 boxWidth:600
-boxHeight:700
+boxHeight:600
 ballRadius:5
 ballX:300
 ballY:400
@@ -94,4 +94,3 @@ playGame: 1
 initialLives: 3
 levelsOn: 1
 powerUpsOn: 1
-paddleWidth: 100

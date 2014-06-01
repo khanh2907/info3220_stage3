@@ -75,7 +75,7 @@ int main(int argc, char *argv[])
             table->addOverlayObject(new OverlayObject(QRectF(480, 0, 100, 20), true, "score","Score: 0"));
 
             // Add paddle
-            Paddle * paddle = new Paddle (QRectF(0, 550, 100, 10));
+            Paddle * paddle = new Paddle (QRectF(0, the_reader->getBoxHeight()-50, the_reader->getPaddleWidth(), 10));
             table->addPaddle(paddle);
 
             unsigned int radius = the_reader->getBallRadius();

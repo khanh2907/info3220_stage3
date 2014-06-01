@@ -1,0 +1,43 @@
+/**
+\mainpage INFO3220 Assignment Stage 3 Documentation
+
+Changes to Stage 3 code
+=======================
+
+In order to extend the code into Stage 3 I had to make some changes to the existing code. 
+
+ConfigReader
+------------
+
+The ConfigReader class was extended to accomodate for additional variables in the configuration
+file. 
+
+Ball-Brick Collision Bug
+-------------------------
+
+I discovered that the collision logic in the base code was incorrect as it was not detecting the correct
+sides. If the ball its the top of the brick is will continue to go through the brick, the brick would lose
+all its life in one hit. To fix this, I had to rewrite their collision logic.
+
+Box Size Bug
+--------------
+
+There was a bug where the box width and height were mixed up. This was fixed.
+
+
+Design Pattern
+================
+
+I chose to use the Strategy Design Pattern. This can be seen in the PowerUp, BallPowerBonus, BallSizeBonus and ExtraLife classes.
+
+Extension
+=========
+
+For the extension, I implemented PowerUps and Levels.
+
+PowerUps will give the ball more size or power. There is also an extra life powerup.
+
+Levels are generated randomly based on the current level. More bricks are generated as the player gets to a higher level.
+
+These extensions can be switched off and on.
+*/
